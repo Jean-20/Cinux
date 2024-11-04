@@ -112,11 +112,7 @@ const Recomendaciones = () => {
                     </div>
                 ))}
             </div>
-            <div className="mt-6 text-center">
-                <Link to="/peliculas" className="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-600 transition duration-200">
-                    Ver más películas
-                </Link>
-            </div>
+
         </section>
     );
 };
