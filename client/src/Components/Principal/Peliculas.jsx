@@ -1,85 +1,124 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MoviesData = [
-    {
-        id: 1,
-        titulo: "Inception",
-        categoria: "Ciencia Ficción",
-        director: "Christopher Nolan",
-        precio: "$14.99",
-        stock: "50",
-        sinopsis: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
-        imagen: "https://images.unsplash.com/photo-1560185127-6a4a37f0c4c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    },
-    {
-        id: 2,
-        titulo: "The Godfather",
-        categoria: "Drama",
-        director: "Francis Ford Coppola",
-        precio: "$12.99",
-        stock: "30",
-        sinopsis: "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.",
-        imagen: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    },
-    {
-        id: 3,
-        titulo: "Parasite",
-        categoria: "Thriller",
-        director: "Bong Joon-ho",
-        precio: "$9.99",
-        stock: "25",
-        sinopsis: "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
-        imagen: "https://images.unsplash.com/photo-1589988020741-3ae622bc4088?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    },
-    {
-        id: 4,
-        titulo: "Interstellar",
-        categoria: "Ciencia Ficción",
-        director: "Christopher Nolan",
-        precio: "$14.99",
-        stock: "15",
-        sinopsis: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-        imagen: "https://images.unsplash.com/photo-1598950200987-70dca5d92d63?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    }
-];
+const Recomendaciones = () => {
+    const peliculas = [
+        {
+            id: 1,
+            titulo: 'Terrifier 3',
+            imagen: 'https://pics.filmaffinity.com/Terrifier_3-141451507-mmed.jpg',
+            destacado: true,
+            sinopsis: 'Un grupo de amigos se enfrenta a un payaso asesino en una noche de Halloween.',
+            idioma: 'Doblada',
+        },
+        {
+            id: 2,
+            titulo: 'Robot Salvaje',
+            imagen: 'https://static.cinepolis.com/resources/mx/movies/posters/414x603/47427-649819-20240911011247.jpg',
+            destacado: false,
+            sinopsis: 'Un joven se une a un robot para salvar su mundo de una amenaza inminente.',
+            idioma: 'Subtitulada',
+        },
+        {
+            id: 3,
+            titulo: 'Haikyuu',
+            imagen: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTJr_NB-PrR86QB3UBICOfkxMqwUBz5p-MQo6EakuQdgf7yYE7l',
+            destacado: false,
+            sinopsis: 'La historia de un joven que sueña con convertirse en un gran jugador de voleibol.',
+            idioma: 'Doblada',
+        },
+        {
+            id: 4,
+            titulo: 'Venom: Let There Be Carnage',
+            imagen: 'https://pbs.twimg.com/media/E5Ym9xWXEAEydmj.jpg:large',
+            destacado: false,
+            sinopsis: 'Eddie Brock lucha contra un nuevo villano, Carnage, que amenaza con causar caos.',
+            idioma: 'Subtitulada',
+        },
+        {
+            id: 5,
+            titulo: 'El Tiempo Que Tenemos',
+            imagen: 'https://pics.filmaffinity.com/Vivir_el_momento-707738925-large.jpg',
+            destacado: true,
+            sinopsis: 'Una conmovedora historia sobre el amor y las segundas oportunidades.',
+            idioma: 'Doblada',
+        },
+        {
+            id: 6,
+            titulo: 'Proyecto X',
+            imagen: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS4I5ZUhze3q2_NumD8069l5anZaBZ4Lbpj1jtUjVsZ3weyvCBw',
+            destacado: true,
+            sinopsis: 'Una fiesta de cumpleaños se convierte en una épica locura.',
+            idioma: 'Subtitulada',
+        },
+        {
+            id: 7,
+            titulo: 'Scooby-Doo',
+            imagen: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQob_5sripQ2lfsyMCbqyDC_z684Mj51J80kcX2gtjGBhf2Lnoy',
+            destacado: true,
+            sinopsis: 'Los famosos detectives de misterio investigan un nuevo caso.',
+            idioma: 'Doblada',
+        },
+        {
+            id: 8,
+            titulo: 'Scary Movie 2',
+            imagen: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRLtaJMowWqblTnqvQnD-vazVdP2kZHTwuLPaDCsvtI9Mrq0WW9',
+            destacado: true,
+            sinopsis: 'Una parodia de las películas de terror que hará reír a todos.',
+            idioma: 'Subtitulada',
+        },
+    ];
 
-const Peliculas = () => {
     return (
-        <div className="flex justify-center items-center min-h-screen mt-20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
-                {MoviesData.map((item) => (
+        <section className="py-8 px-4 bg-gray-100 mt-20">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                {peliculas.map((pelicula) => (
                     <div
-                        key={item.id}
-                        className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full transform transition-transform duration-300 hover:scale-105"
+                        key={pelicula.id}
+                        className="relative group overflow-hidden rounded-lg bg-white shadow-lg transition-transform transform hover:scale-105"
                     >
-                        <Link to={`/detalle/${item.id}`} state={{ pelicula: item }}>
-                            <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
-                                <img
-                                    src={item.imagen}
-                                    alt={item.titulo}
-                                    className="object-cover w-full h-full"
-                                />
+                        {pelicula.destacado && (
+                            <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                                Estreno
+                            </span>
+                        )}
+                        <img
+                            src={pelicula.imagen}
+                            alt={pelicula.titulo}
+                            className="w-full h-100 object-cover"
+                        />
+                        <div className="p-4">
+                            <h3 className="font-semibold text-lg text-center">{pelicula.titulo}</h3>
+                        </div>
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="flex space-x-4">
+                                <Link
+                                    to={`/comprar/${pelicula.id}`}
+                                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200"
+                                >
+                                    Comprar
+                                </Link>
+                                <Link
+                                    to={{
+                                        pathname: `/detalles`,
+                                        state: { pelicula },
+                                    }}
+                                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+                                >
+                                    Más detalles
+                                </Link>
                             </div>
-                            <div className="p-6">
-                                <div className="flex items-center justify-between mb-2">
-                                    <p className="block font-sans text-base font-medium text-blue-gray-900">
-                                        {item.titulo}
-                                    </p>
-                                    <p className="block font-sans text-base font-medium text-blue-gray-900">
-                                        {item.precio}
-                                    </p>
-                                </div>
-                                <p className="block font-sans text-sm text-gray-700 opacity-75">
-                                    {item.sinopsis} {/* Cambia de 'descripcion' a 'sinopsis' */}
-                                </p>
-                            </div>
-                        </Link>
+                        </div>
                     </div>
                 ))}
             </div>
-        </div>
+            <div className="mt-6 text-center">
+                <Link to="/peliculas" className="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-600 transition duration-200">
+                    Ver más películas
+                </Link>
+            </div>
+        </section>
     );
 };
 
-export default Peliculas;
+export default Recomendaciones;
