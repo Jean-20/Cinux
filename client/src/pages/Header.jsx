@@ -24,16 +24,16 @@ const Header = () => {
       <nav className="nav font-semibold text-lg text-white flex-grow">
         <ul className="flex items-center justify-center space-x-6">
           <li className="relative group">
-            <Link to="/" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Home</Link>
+            <Link to="/home" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Home</Link>
           </li>
           <li className="relative group">
-            <Link to="/peliculas" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Películas</Link>
+            <Link to="/home/peliculas" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Películas</Link>
           </li>
           <li className="relative group">
-            <Link to="/cines" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
+            <Link to="/home/cines" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
           </li>
           <li className="relative group">
-            <Link to="/dulceria" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Dulcería</Link>
+            <Link to="/home/dulceria" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Dulcería</Link>
           </li>
         </ul>
       </nav>

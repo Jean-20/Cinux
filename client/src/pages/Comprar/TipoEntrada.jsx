@@ -2,7 +2,7 @@ import React from 'react'
 
 const TipoEntrada = () => {
   return (
-    <div>TipoEntrada</div>
+    <div>esto no vale (eliminalo) xd me da weba eliminarlo xd</div>
   )
 }
 

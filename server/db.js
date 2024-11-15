@@ -5,13 +5,13 @@ dotenv.config();
 
 
 export const connectBd = async () => {
- 
-    const connectionString =process.env.MONGODB_URI;
+
+    const connectionString = process.env.MONGODB_URI;
     try {
 
         await mongoose.connect(connectionString, {
-            serverSelectionTimeoutMS: 30000, 
-            socketTimeoutMS: 45000 
+            serverSelectionTimeoutMS: 30000,
+            socketTimeoutMS: 45000
         });
         console.log('>>> DB is connected');
     } catch (error) {

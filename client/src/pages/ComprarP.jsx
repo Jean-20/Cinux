@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Stepper, Step, Button } from "@material-tailwind/react";
-import { HomeIcon, CogIcon, UserIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, UserIcon, CogIcon, CheckCircleIcon, DocumentIcon } from "@heroicons/react/24/outline";
 import { Outlet } from "react-router-dom";
 
 export const ComprarP = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isLastStep, setIsLastStep] = useState(false);
-  const [isFirstStep, setIsFirstStep] = useState(false);
+  const steps = [
+    { icon: <HomeIcon className="w-5 h-5" />, label: "Inicio" },
+    { icon: <UserIcon className="w-5 h-5" />, label: "Usuario" },
+    { icon: <DocumentIcon className="w-5 h-5" />, label: "Documentos" },
+    { icon: <CogIcon className="w-5 h-5" />, label: "Configuración" },
+    { icon: <CheckCircleIcon className="w-5 h-5" />, label: "Finalizar" },
+  ];
+
+  const isLastStep = activeStep === steps.length - 1;
+  const isFirstStep = activeStep === 0;
 
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
   const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
@@ -14,38 +21,40 @@ export const ComprarP = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <Stepper
-          activeStep={activeStep}
-          isLastStep={(value) => setIsLastStep(value)}
-          isFirstStep={(value) => setIsFirstStep(value)}
-          className="mb-8"
-        >
-          <Step onClick={() => setActiveStep(0)} className="cursor-pointer">
-            <HomeIcon className={`h-6 w-6 ${activeStep === 0 ? 'text-blue-500' : 'text-gray-400'}`} />
-          </Step>
-          <Step onClick={() => setActiveStep(1)} className="cursor-pointer">
-            <UserIcon className={`h-6 w-6 ${activeStep === 1 ? 'text-blue-500' : 'text-gray-400'}`} />
-          </Step>
-          <Step onClick={() => setActiveStep(2)} className="cursor-pointer">
-            <CogIcon className={`h-6 w-6 ${activeStep === 2 ? 'text-blue-500' : 'text-gray-400'}`} />
-          </Step>
-          <Step onClick={() => setActiveStep(2)} className="cursor-pointer">
-            <CogIcon className={`h-6 w-6 ${activeStep === 3 ? 'text-blue-500' : 'text-gray-400'}`} />
-          </Step>
-          <Step onClick={() => setActiveStep(2)} className="cursor-pointer">
-            <CogIcon className={`h-6 w-6 ${activeStep === 4 ? 'text-blue-500' : 'text-gray-400'}`} />
-          </Step>
-        </Stepper>
+        <div className="relative flex items-center justify-between w-full mb-8">
+          <div className="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-300"></div>
+          <div className="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-900 transition-all duration-500"></div>
+
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className={`relative z-10 grid w-10 h-10 font-bold text-white transition-all duration-300 ${activeStep === index ? 'bg-gray-900' : 'bg-gray-300'} rounded-full place-items-center cursor-pointer`}
+              onClick={() => setActiveStep(index)}
+            >
+              {React.cloneElement(step.icon, { className: `${activeStep === index ? 'text-white' : 'text-gray-900'}` })}
+            </div>
+          ))}
+        </div>
+
         <div className="mb-8">
           <Outlet />
         </div>
+
         <div className="flex justify-between">
-          <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-300 text-gray-700 hover:bg-gray-400">
+          <button
+            onClick={handlePrev}
+            disabled={isFirstStep}
+            className="select-none rounded-lg bg-gray-300 py-3 px-6 text-center text-xs font-bold uppercase text-gray-700 shadow-md transition-all hover:bg-gray-400 focus:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+          >
             Anterior
-          </Button>
-          <Button onClick={handleNext} disabled={isLastStep} className="bg-blue-500 text-white hover:bg-blue-600">
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={isLastStep}
+            className="select-none rounded-lg bg-gray-900 py-3 px-6 text-center text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-gray-800 focus:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+          >
             Siguiente
-          </Button>
+          </button>
         </div>
       </div>
     </div>
