@@ -18,7 +18,7 @@ const HomePage = () => {
           <Routes>
             <Route path="*" element={<Home />} />
             <Route path="/contactanos" element={<Contactanos />} />
-            <Route path="/cines" element={<Cines />} />
+            <Route path="/sedes" element={<Cines />} />
             <Route path="/peliculas" element={<Peliculas />} />
             <Route path="/dulceria" element={<Dulceria />} />
             <Route path="/comprar/*" element={

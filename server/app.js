@@ -1,8 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import userRoutes from './routes/user.routes.js';
-import catalogoPeliculasRoutes from './routes/catalogoPeliculas.routes.js';
+import peliculasRoutes from './routes/peliculas.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import dulceriaRoutes from './routes/dulceria.routes.js'
+import sedesRoutes from './routes/sedes.routes.js'
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -24,9 +26,11 @@ app.use(cors(
         credentials: true
     }
 ))
-app.use('/api', catalogoPeliculasRoutes);
+app.use('/api', peliculasRoutes);
 app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api', dulceriaRoutes);
+app.use('/api', sedesRoutes);
 
 
 app.use((err, req, res, next) => {

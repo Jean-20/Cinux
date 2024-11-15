@@ -1,9 +1,9 @@
-import Pelicula from '../models/catalogoPeliculas.model.js';
+import Pelicula from '../models/peliculas.model.js'
 
 export const getPeliculas = async (req, res) => {
     const foundPeliculas = await Pelicula.find();
     if(!foundPeliculas){
-        return res.status(404).json({mansaje: 'Aun no se ha creado nada aqui'})
+        return res.status(404).json({mensaje: 'Aun no se ha creado nada aqui'})
     }
     res.json(foundPeliculas);
 }

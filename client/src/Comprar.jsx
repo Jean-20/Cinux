@@ -15,11 +15,12 @@ const Comprar = () => {
       <ComprarP />
       
       <Routes>
+        <Route path="*" element={<SedeHorario />} />
         <Route path="/asiento" element={<Asiento />} />
         <Route path="/entradas" element={<Entradas />} />
         <Route path="/dulceria" element={<Dulceria />} />
         <Route path="/pago" element={<Pago />} />
-        <Route path="/sede" element={<SedeHorario />} />
+        <Route path="/sedes" element={<SedeHorario />} />
         <Route path="/tipoEntrada" element={<TipoEntrada />} />
       </Routes>
     </div>

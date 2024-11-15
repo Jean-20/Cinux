@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const catalogoPeliculasSchema = new mongoose.Schema({
+const PeliculasSchema = new mongoose.Schema({
     nombre: {
       type: String,
       required: true,
@@ -21,13 +21,9 @@ const catalogoPeliculasSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    fechaEstreno: {
-      type: Date,
-      default: Date.now,
-    }
   }, {
     timestamps: true,
     versionKey: false
   })
 
-export default mongoose.model('CatalogoPeliculas', catalogoPeliculasSchema);
+export default mongoose.model('Peliculas', PeliculasSchema);

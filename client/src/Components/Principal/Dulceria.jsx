@@ -1,6 +1,9 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import { Spinner } from '@material-tailwind/react';
+import { getDulces } from '../../api/dulceria';
 
-const DulceriaData = [
+
+/* const DulceriaData = [
     {
         id: 1,
         nombre: "Chocolate Milka",
@@ -37,15 +40,37 @@ const DulceriaData = [
         descripcion: "Palomitas de maíz recién hechas, perfectas para ver una película.",
         url: "https://images.unsplash.com/photo-1602041591672-7e95b00ab0d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
     }
-];
+]; */
 
 const Dulceria = () => {
+    const [dulces, setDulces] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const fetchData = async () => {
+        setLoading(true);
+        try {
+            const data = await getDulces();
+            setDulces(data);
+        } catch (error) {
+            console.error('Error fetching dulceria:', error);
+        } finally {
+            setLoading(false);
+        }
+        };
+        fetchData();
+    }, []);
     return (
         <div className="flex justify-center items-center min-h-screen mt-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
-                {DulceriaData.map((item) => (
+            {loading ? (
+            <div className=" flex text-center justify-center ">
+                <Spinner color="blue" size="xxl"  className="flex justify-center m-20 w-28 h-28"/>
+            </div>
+            ):(
+                <>
+                {dulces.map((item) => (
                     <div
-                        key={item.id}
+                        key={item._id}
                         className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full transform transition-transform duration-300 hover:scale-105"
                     >
                         <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
@@ -70,6 +95,8 @@ const Dulceria = () => {
                         </div>
                     </div>
                 ))}
+                </>
+            )}
             </div>
         </div>
     );

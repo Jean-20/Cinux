@@ -30,7 +30,7 @@ const Header = () => {
             <Link to="/home/peliculas" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Películas</Link>
           </li>
           <li className="relative group">
-            <Link to="/home/cines" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
+            <Link to="/home/sedes" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
           </li>
           <li className="relative group">
             <Link to="/home/dulceria" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Dulcería</Link>
