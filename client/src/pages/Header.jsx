@@ -16,24 +16,24 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-black shadow-lg flex items-center justify-between px-8 py-4 z-50">
+    <header className="fixed top-0 left-0 w-full bg-red-600 shadow-lg flex items-center justify-between px-8 py-4 z-50">
       <h1 className="text-2xl font-bold text-white">
-        <Link to="/" className="hover:text-cyan-400 transition duration-200">Cinux</Link>
+        <Link to="/" className="hover:text-black transition duration-200">Cinux</Link>
       </h1>
 
       <nav className="nav font-semibold text-lg text-white flex-grow">
         <ul className="flex items-center justify-center space-x-6">
           <li className="relative group">
-            <Link to="/home" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Home</Link>
+            <Link to="/home" className="hover:text-black  transition duration-200" onClick={closeMenu}>Home</Link>
           </li>
           <li className="relative group">
-            <Link to="/home/peliculas" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Películas</Link>
+            <Link to="/home/peliculas" className="hover:text-black  transition duration-200" onClick={closeMenu}>Películas</Link>
           </li>
           <li className="relative group">
-            <Link to="/home/sedes" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
+            <Link to="/home/sedes" className="hover:text-black  transition duration-200" onClick={closeMenu}>Sedes</Link>
           </li>
           <li className="relative group">
-            <Link to="/home/dulceria" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Dulcería</Link>
+            <Link to="/home/dulceria" className="hover:text-black  transition duration-200" onClick={closeMenu}>Dulcería</Link>
           </li>
         </ul>
       </nav>

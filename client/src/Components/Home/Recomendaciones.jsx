@@ -104,9 +104,13 @@ const Recomendaciones = () => {
          navigate("/home/comprar/sedes"); 
     }
 
+    const hadleDetalles = (id) => {
+        navigate("/home/pelicula/detalles/" + id);
+    }
+
 
     return (
-        <section className="py-8 px-4 bg-gray-100 mt-20">
+        <section className="py-8 px-4 bg-gray-100 pt-20">
             <h2 className="text-3xl font-bold mb-4 text-center">Recomendaciones</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {loading ? (
@@ -139,16 +143,9 @@ const Recomendaciones = () => {
                                     Comprar
                                 </button>
                                 
-                                
-                                <Link
-                                    to={{
-                                        pathname: `/detalles/${pelicula._id}`,
-                                        state: { pelicula },
-                                    }}
-                                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
-                                >
+                                <button onClick={()=> hadleDetalles(pelicula._id)} className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
                                     Más detalles
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>

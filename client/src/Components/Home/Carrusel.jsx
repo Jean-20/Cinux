@@ -35,7 +35,7 @@ const Carrusel = () => {
     };
 
     return (
-        <div id="animation-carousel" className="relative w-full h-full mt-20">
+        <div id="animation-carousel" className="relative h-full pt-20 bg-white mx-5">
             {/* Carousel wrapper */}
             <div className="relative h-96 overflow-hidden rounded-lg md:h-[680px]">
                 {images.map((image, index) => (

@@ -65,7 +65,7 @@ const Entradas = () => {
 
 
   const handleCompra = () => {
-const entradasCom = entradas.filter((entrada) => entrada.cantidad > 0);
+  const entradasCom = entradas.filter((entrada) => entrada.cantidad > 0);
     
     setEntradasComprados(entradasCom);
 
@@ -75,7 +75,7 @@ const entradasCom = entradas.filter((entrada) => entrada.cantidad > 0);
       precioTotal: "entrada.precio * entrada.cantidad",
     }))
     dispatch(ingresoDatosCompra(resumenCompra));
-    navigate("/home/comprar/asiento");
+    navigate("/home/comprar/dulceria");
   };
 
   return (
@@ -159,7 +159,7 @@ const entradasCom = entradas.filter((entrada) => entrada.cantidad > 0);
       {/* Botón Continuar */}
       <div className="mt-6 flex justify-center">
         <button
-          onClick={handleCompra}
+          onClick={()=>handleCompra}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar

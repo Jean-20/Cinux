@@ -74,12 +74,12 @@ const Dulceria = () => {
 
 
   return (
-    <div className="p-8 bg-white rounded-lg shadow-lg w-full max-w-4xl mx-auto">
+    <div className="p-2 bg-white rounded-lg shadow-lg w-full max-w-4xl mx-auto ">
       <h3 className="text-2xl font-bold text-blue-600 mb-4">Dulcería</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         {combos.map((combo) => (
-          <div key={combo.id} className="border rounded-lg p-4 bg-gray-100">
+          <div key={combo.id} className="border rounded-lg p-2 bg-gray-100">
             <img
               src={combo.imagen}
               alt={combo.nombre}

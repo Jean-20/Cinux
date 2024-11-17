@@ -25,7 +25,7 @@ const Pago = () => {
   };
 
   return (
-    <section className="py-8 antialiased bg-gray-100 md:py-16">
+    <section className="py-8 antialiased bg-gray-100 md:py-8 rounded-lg">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="mx-auto max-w-fit">
           <h1 className="text-xl text-black text-center font-bold sm:text-2xl">Formulario</h1>

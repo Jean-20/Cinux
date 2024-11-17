@@ -50,7 +50,7 @@ const ResumenCompra = () => {
   }, [resumenCompra]);
 
   return (
-    <div className="p-5 border-black w-[300px] bg-gray-100">
+    <div className="p-5 m-5 border-black w-[350px] bg-gray-100">
       {resumenCompraHtml}
     </div>
   );

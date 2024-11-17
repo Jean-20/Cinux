@@ -8,8 +8,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
-    const { login } = useAuth(); // Obtén la función de login desde el contexto
-
+    const { login } = useAuth(); 
     const handleRegister = (e) => {
         e.preventDefault();
         console.log('Nombre:', name);
@@ -22,9 +21,9 @@ const Register = () => {
             return;
         }
 
-        // Llama a login() del contexto para activar el estado de autenticación
+
         login();
-        navigate('/'); // Redirige a la página principal o a la deseada
+        navigate('/'); 
     };
 
     return (

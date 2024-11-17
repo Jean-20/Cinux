@@ -55,58 +55,64 @@ const Asiento = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-lg">
-      {/* Encabezado de la pantalla */}
-      <h2 className="text-2xl font-semibold mb-4">Pantalla</h2>
-      <div className="w-full h-2 bg-slate-950"></div>
+    <div className="flex flex-col items-center p-2 bg-gray-50 rounded-lg shadow-lg w-[800]">
+      <div className='flex flex-row gap-10'>
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Pantalla</h2>
+          <div className="w-full h-2 bg-slate-950"></div>
 
-      {/* Mapa de asientos */}
-      <div className="flex flex-col items-center gap-2">
-        {filas.map((fila) => (
-          <div key={fila} className="flex items-center justify-center">
-            <span className="w-8 text-center font-semibold">{fila}</span>
-            <div className="grid grid-cols-12 gap-2">
-              {columnas.map((col) => {
-                const asiento = `${fila}${col}`;
-                return (
-                  <button
-                    key={asiento}
-                    className={`w-5 h-5 flex items-center justify-center rounded-full hover:scale-105 transition-all ${getClaseAsiento(asiento)}`}
-                    onClick={() => toggleAsiento(asiento)}
-                  />
-                );
-              })}
-            </div>
-            <span className="w-8 text-center font-semibold">{fila}</span>
+          {/* Mapa de asientos */}
+          <div className="flex flex-col items-center gap-2">
+            {filas.map((fila) => (
+              <div key={fila} className="flex items-center justify-center">
+                <span className="w-8 text-center font-semibold">{fila}</span>
+                <div className="grid grid-cols-12 gap-2">
+                  {columnas.map((col) => {
+                    const asiento = `${fila}${col}`;
+                    return (
+                      <button
+                        key={asiento}
+                        className={`w-5 h-5 flex items-center justify-center rounded-full hover:scale-105 transition-all ${getClaseAsiento(asiento)}`}
+                        onClick={() => toggleAsiento(asiento)}
+                      />
+                    );
+                  })}
+                </div>
+                <span className="w-8 text-center font-semibold">{fila}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* Leyenda de asientos */}
-      <div className="flex flex-col mt-6 gap-2">
-        <div className="flex items-center gap-2">
-          <span className="w-5 h-5 bg-white border border-gray-400 rounded-full"></span>
-          <p>Disponible</p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-5 h-5 bg-blue-500 rounded-full"></span>
-          <p>Seleccionada</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-5 h-5 bg-red-500 rounded-full"></span>
-          <p>Ocupada</p>
+        {/* Encabezado de la pantalla */}
+        
+
+        {/* Leyenda de asientos */}
+        <div>
+          <div className="flex flex-col mt-6 gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 bg-white border border-gray-400 rounded-full"></span>
+              <p>Disponible</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 bg-blue-500 rounded-full"></span>
+              <p>Seleccionada</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 bg-red-500 rounded-full"></span>
+              <p>Ocupada</p>
+            </div>
+          </div>
+
+          {/* Lista de asientos seleccionados */}
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold">Butacas seleccionadas:</h3>
+            <p className="text-gray-700">
+              {asientosSeleccionados.length > 0 ? asientosSeleccionados.join(', ') : 'Ninguna'}
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* Lista de asientos seleccionados */}
-      <div className="mt-4">
-        <h3 className="text-lg font-semibold">Butacas seleccionadas:</h3>
-        <p className="text-gray-700">
-          {asientosSeleccionados.length > 0 ? asientosSeleccionados.join(', ') : 'Ninguna'}
-        </p>
-      </div>
-
-      <button onClick={() => handleFuctionClick()} className="mt-6 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+      <button onClick={() => handleFuctionClick()} className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
         Siguiente
       </button>
     </div>

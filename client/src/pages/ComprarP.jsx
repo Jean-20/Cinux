@@ -16,16 +16,19 @@ export const ComprarP = () => {
   const pasosCompra = (activeStep) => {
     switch (activeStep) {
       case 0:
-        return "/home/comprar/sede";
-      case 1:
         return "/home/comprar/asiento";
-      case 2:
+      case 1:
         return "/home/comprar/entradas";
-      case 3:
+      case 2:
         return "/home/comprar/dulceria";
-      case 4:
+      case 3:
         return "/home/comprar/pago";
     }
+  }
+
+  const hadleClick = (step) => {
+    setActiveStep(step);
+    navigate(pasosCompra(step));
   }
 
   const handleNext = () => {
@@ -50,37 +53,35 @@ export const ComprarP = () => {
   return (
     <>
 
-      <div className="bg-white pt-20 px-10 max-w-md w-full">
+      <div className="bg-white mt-20 p-2 max-w-md rounded-lg w-full m-2">
         <Stepper
           activeStep={activeStep}
           isLastStep={(value) => setIsLastStep(value)}
           isFirstStep={(value) => setIsFirstStep(value)}
-          className="mb-8"
+          className=""
         >
-          <Step onClick={() => setActiveStep(0)} className="cursor-pointer">
+          <Step onClick={() => hadleClick(0)} className="cursor-pointer">
             <HomeIcon className={`h-6 w-6 ${activeStep === 0 ? 'text-blue-500' : 'text-gray-400'}`} />
           </Step>
-          <Step onClick={() => setActiveStep(1)} className="cursor-pointer">
+          <Step onClick={() => hadleClick(1)} className="cursor-pointer">
             <UserIcon className={`h-6 w-6 ${activeStep === 1 ? 'text-blue-500' : 'text-gray-400'}`} />
           </Step>
-          <Step onClick={() => setActiveStep(2)} className="cursor-pointer">
+          <Step onClick={() => hadleClick(2)} className="cursor-pointer">
             <CogIcon className={`h-6 w-6 ${activeStep === 2 ? 'text-blue-500' : 'text-gray-400'}`} />
           </Step>
-          <Step onClick={() => setActiveStep(3)} className="cursor-pointer">
+          <Step onClick={() => hadleClick(3)} className="cursor-pointer">
             <CogIcon className={`h-6 w-6 ${activeStep === 3 ? 'text-blue-500' : 'text-gray-400'}`} />
           </Step>
-          <Step onClick={() => setActiveStep(4)} className="cursor-pointer">
-            <CogIcon className={`h-6 w-6 ${activeStep === 4 ? 'text-blue-500' : 'text-gray-400'}`} />
-          </Step>
+
         </Stepper>
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-300 text-gray-700 hover:bg-gray-400">
             Anterior
           </Button>
           <Button onClick={handleNext} disabled={isLastStep} className="bg-blue-500 text-white hover:bg-blue-600">
             Siguiente
           </Button>
-        </div>
+        </div> */}
       </div>
     </>
 

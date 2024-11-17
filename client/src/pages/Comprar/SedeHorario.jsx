@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const SedeHorario = () => {
   const [expanded, setExpanded] = useState(null);
-  const [selectedDate, setSelectedDate] = useState('today');
+  const [selectedDate, setSelectedDate] = useState('hoy');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const SedeHorario = () => {
     {
       sede: 'CP Alcazar',
       horarios: {
-        today: [
+        hoy: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['05:10 pm', '06:00 pm', '07:00 pm', '08:20 pm', '09:00 pm', '10:00 pm'],
@@ -26,7 +26,7 @@ const SedeHorario = () => {
             funciones: ['02:10 pm', '03:00 pm'],
           },
         ],
-        tomorrow: [
+        mañana: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['05:00 pm', '07:00 pm'],
@@ -37,13 +37,13 @@ const SedeHorario = () => {
     {
       sede: 'CP Arequipa Mall Plaza',
       horarios: {
-        today: [
+        hoy: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['01:10 pm', '03:00 pm', '05:10 pm'],
           },
         ],
-        tomorrow: [
+        mañana: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['05:00 pm', '07:00 pm'],
@@ -54,13 +54,13 @@ const SedeHorario = () => {
     {
       sede: 'CP Caminos del Inca',
       horarios: {
-        today: [
+        hoy: [
           {
             tipo: '2D REGULAR DOBLADA',
             funciones: ['12:00 pm', '03:00 pm', '06:00 pm'],
           },
         ],
-        tomorrow: [
+        mañana: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['05:00 pm', '07:00 pm'],
@@ -71,13 +71,13 @@ const SedeHorario = () => {
     {
       sede: 'CP El Polo',
       horarios: {
-        today: [
+        hoy: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['07:00 pm', '09:30 pm'],
           },
         ],
-        tomorrow: [
+        mañana: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['05:00 pm', '07:00 pm'],
@@ -88,13 +88,13 @@ const SedeHorario = () => {
     {
       sede: 'CP La Molina',
       horarios: {
-        today: [
+        hoy: [
           {
             tipo: '2D REGULAR DOBLADA',
             funciones: ['01:30 pm', '04:00 pm', '08:00 pm'],
           },
         ],
-        tomorrow: [
+        mañana: [
           {
             tipo: '2D REGULAR SUBTITULADA',
             funciones: ['05:00 pm', '07:00 pm'],
@@ -128,20 +128,20 @@ const SedeHorario = () => {
   }
 
   return (
-    <div className="p-10">
-      <div className="mb-10">
+    <div className="p-5 w-[600px] bg-white">
+      <div className="mb-2">
         <label className="block mb-2">Selecciona una fecha:</label>
         <select
           value={selectedDate}
           onChange={handleDateChange}
           className="border rounded p-2"
         >
-          <option value="today">Hoy</option>
-          <option value="tomorrow">Mañana</option>
+          <option value="hoy">Hoy</option>
+          <option value="mañana">Mañana</option>
         </select>
       </div>
       {data.map((sede, index) => (
-        <div key={index} className="mb-4 border-b pb-2">
+        <div key={index} className="mb-4 border-b">
           <h3
             className="text-lg font-semibold cursor-pointer flex justify-between items-center"
             onClick={() => toggleSede(index)}

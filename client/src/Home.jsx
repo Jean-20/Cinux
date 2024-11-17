@@ -12,7 +12,7 @@ import Detalle from './Components/Principal/Detalle';
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col sm:flex-row bg-gray-300 h-full">
+    <div className="flex flex-col sm:flex-row bg-white h-full">
       <div className="flex flex-col w-[100%] md:ml-[300px]">
         <Header />
         <div>
@@ -22,7 +22,7 @@ const HomePage = () => {
             <Route path="/sedes" element={<Sedes/>} />
             <Route path="/peliculas" element={<Peliculas />} />
             <Route path="/dulceria" element={<Dulceria />} />
-            <Route path="/detalles" element={<Detalle />} />
+            <Route path="/pelicula/detalles/:id" element={<Detalle />} />
             <Route path="/comprar/*" element={
               <Comprar/>
           }/>

@@ -14,7 +14,7 @@ export const getPeliculas = async () => {
 
 export const getPelicula = async (id) => {
   try {
-    const response = await axios.get(`${API}/api/peliculas/${id}`);
+    const response = await axios.get(`${API}/api/pelicula/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching pelicula with id ${id}:`, error);
@@ -24,7 +24,7 @@ export const getPelicula = async (id) => {
 
 export const registerPelicula = async (pelicula) => {
   try {
-    const response = await axios.post(`${API}/api/peliculas`, pelicula);
+    const response = await axios.post(`${API}/api/pelicula`, pelicula);
     return response.data;
   } catch (error) {
     console.error('Error registering pelicula:', error);
@@ -34,7 +34,7 @@ export const registerPelicula = async (pelicula) => {
 
 export const deletePelicula = async (id) => {
   try {
-    const response = await axios.delete(`${API}/api/peliculas/${id}`);
+    const response = await axios.delete(`${API}/api/pelicula/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Error deleting pelicula with id ${id}:`, error);
