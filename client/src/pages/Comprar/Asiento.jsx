@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+
+/* import { getAsiestosOcupados } from '../../api/asientos'; */
 
 const filas = ['AA', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
 const columnas = Array.from({ length: 12 }, (_, i) => i + 1);
 
 const Asiento = () => {
   const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
+  const [asientosOcupados, setAsientosOcupados] = useState(['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10']);
+
 
   const toggleAsiento = (asiento) => {
+    if(asientosOcupados.includes(asiento)) return;
+
     setAsientosSeleccionados((prev) =>
       prev.includes(asiento)
         ? prev.filter((a) => a !== asiento)
@@ -16,8 +24,22 @@ const Asiento = () => {
 
   const getClaseAsiento = (asiento) => {
     if (asientosSeleccionados.includes(asiento)) return 'bg-blue-500 text-white';
+    if(asientosOcupados.includes(asiento)) return 'bg-red-500 text-white';
     return 'bg-white border border-gray-400';
   };
+
+
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(actualizarCompra({
+      nombrePelicula:"",
+      asientos: asientosSeleccionados,
+      cantidadAsientos: asientosSeleccionados.length,
+  }))
+  }, [asientosSeleccionados]);
+  
+  
 
   return (
     <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-lg">

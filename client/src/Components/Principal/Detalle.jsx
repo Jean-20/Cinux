@@ -1,9 +1,21 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getPelicula } from '../../api/peliculas';
+
 
 const DetallePelicula = () => {
-    const location = useLocation();
-    const { pelicula } = location.state || {}; // Desestructuramos la película del estado
+    const [pelicula, setPelicula] = useState([]);
+    useEffect(() => {  
+        const fetchPelicula = async() =>{
+            const res = await getPelicula();
+            setPelicula(res);
+
+        } 
+        fetchPelicula();
+    }, []);
+
+        
+
 
     if (!pelicula) {
         return <p>No se encontró información de la película.</p>;
@@ -13,11 +25,12 @@ const DetallePelicula = () => {
         <div className="flex flex-col items-center min-h-screen bg-gray-100">
             <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden mt-10">
                 {/* Imagen de la película */}
-                <img src={pelicula.imagen} alt={pelicula.titulo} className="w-full h-96 object-cover" />
+                <img src={pelicula.url} alt={pelicula.nombre} className="w-full h-96 object-cover" />
                 <div className="p-6">
-                    <h2 className="text-3xl font-bold text-gray-800">{pelicula.titulo}</h2>
-                    <p className="text-gray-600 mt-2">{pelicula.sinopsis}</p>
-                    <p className="text-gray-500 mt-4">Idioma: {pelicula.idioma}</p>
+                    <h2 className="text-3xl font-bold text-gray-800">{pelicula.nombre}</h2>
+                    <h3 className="text-3xl font-bold text-gray-800">{pelicula.nombre}</h3>
+                    <h3 className="text-3xl font-bold text-gray-800">{pelicula.productora}</h3>
+                    <p className="text-gray-600 mt-2">{pelicula.descipcion}</p>
                 </div>
             </div>
         </div>

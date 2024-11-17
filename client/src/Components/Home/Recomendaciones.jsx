@@ -124,9 +124,10 @@ const Recomendaciones = () => {
                                 >
                                     Comprar
                                 </Link>
+                                
                                 <Link
                                     to={{
-                                        pathname: `/home/comprar/sede`,
+                                        pathname: `/detalles/${pelicula._id}`,
                                         state: { pelicula },
                                     }}
                                     className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"

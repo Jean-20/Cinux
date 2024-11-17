@@ -1,5 +1,9 @@
 // Dulceria.jsx
 import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Dulceria = () => {
   const [cantidades, setCantidades] = useState({
@@ -8,6 +12,9 @@ const Dulceria = () => {
     combo3: 0,
     combo4: 0,
   });
+  const datos = useSelector((state) => state.entradaCompra);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const combos = [
     {
@@ -51,9 +58,17 @@ const Dulceria = () => {
     }));
   };
 
+  
+
   const handleContinuar = () => {
-    alert('Continuando con la compra de dulcería...');
+    dispatch(actualizarCompra({
+      ...datos,
+      nombrePelicula:"",
+      dulceria: dulce,
+      }));
+      navigate("/home/comprar/pago");
   };
+
 
   return (
     <div className="p-8 bg-white rounded-lg shadow-lg w-full max-w-4xl mx-auto">

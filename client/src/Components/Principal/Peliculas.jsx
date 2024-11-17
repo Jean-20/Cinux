@@ -90,6 +90,11 @@ const Recomendaciones = () => {
         fetchData();
     }, []);
 
+    const btnAgregarRedux = (pelicula) =>{
+        console.log(pelicula);
+    }
+    
+
 
     return (
         <section className="py-8 px-4 bg-gray-100 mt-20">
@@ -120,7 +125,7 @@ const Recomendaciones = () => {
                             <h3 className="font-semibold text-lg text-center">{pelicula.nombre}</h3>
                         </div>
                         <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="flex space-x-4">
+                            <button className="flex space-x-4" onClick={btnAgregarRedux(pelicula.nombre)}>
                                 <Link
                                     to={`/home/comprar/sede`}
                                     className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200"
@@ -136,7 +141,7 @@ const Recomendaciones = () => {
                                 >
                                     Más detalles
                                 </Link>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 ))}

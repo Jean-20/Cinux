@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 
 const Entradas = () => {
   const [cantidades, setCantidades] = useState({
@@ -7,12 +10,22 @@ const Entradas = () => {
     mayores: 0,
   });
 
+  const [tipoEntrada, setTipoEntrada] = useState({
+    general: "General",
+    ninos: "Niños",
+    mayores: "Mayores",
+  });
+  
   const precios = {
     general: 36.00,
     ninos: 34.00,
     mayores: 34.00,
   };
 
+  
+
+  
+  
   const handleIncrementar = (tipo) => {
     setCantidades((prev) => ({ ...prev, [tipo]: prev[tipo] + 1 }));
   };
@@ -24,9 +37,44 @@ const Entradas = () => {
     }));
   };
 
-  const handleContinuar = () => {
-    alert('Continuando con la compra...');
-    // Aquí puedes añadir la lógica para continuar con el proceso
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const datos = useSelector((state) => state.entradaCompra);
+
+
+  const handleCompra = () => {
+    const entradas =[
+      {
+        nombre: "general",
+        tipoEntrada: "General 2D OL",
+        cantidad: cantidades.general,
+        precio: 36.00,
+      },
+      {
+        nombre: "ninos",
+        tipoEntrada: "Niños 2D OL",
+        cantidad: cantidades.ninos,
+        precio: 34.00,
+      },
+      {
+        nombre: "mayores",
+        tipoEntrada: "Mayores 2D OL",
+        cantidad: cantidades.mayores,
+        precio: 34.00,
+      },
+    ];
+    
+
+
+    const resumenCompra =  entradas.map((entrada) => ({
+      ...datos,
+      nombrePelicula:"",
+      tipoEntrada: entrada.tipoEntrada,
+      cantidadAsientos: entrada.cantidad,
+      precioTotal: entrada.precio * entrada.cantidad,
+    }))
+    dispatch(actualizarCompra(resumenCompra));
+    navigate("/home/comprar/asiento");
   };
 
   return (
@@ -110,7 +158,7 @@ const Entradas = () => {
       {/* Botón Continuar */}
       <div className="mt-6 flex justify-center">
         <button
-          onClick={handleContinuar}
+          onClick={handleCompra}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar

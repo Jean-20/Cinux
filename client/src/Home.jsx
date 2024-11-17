@@ -1,13 +1,14 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Contactanos from './pages/Contactanos';
-import Cines from './Components/Principal/Sedes';
 import Peliculas from './Components/Principal/Peliculas';
 import Dulceria from './Components/Principal/Dulceria';
 import Comprar from './Comprar';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
 import Home from './pages/Home'
+import Sedes from './Components/Principal/Sedes';
+import Detalle from './Components/Principal/Detalle';
 
 const HomePage = () => {
   return (
@@ -18,9 +19,10 @@ const HomePage = () => {
           <Routes>
             <Route path="*" element={<Home />} />
             <Route path="/contactanos" element={<Contactanos />} />
-            <Route path="/sedes" element={<Cines />} />
+            <Route path="/sedes" element={<Sedes/>} />
             <Route path="/peliculas" element={<Peliculas />} />
             <Route path="/dulceria" element={<Dulceria />} />
+            <Route path="/detalles" element={<Detalle />} />
             <Route path="/comprar/*" element={
               <Comprar/>
           }/>

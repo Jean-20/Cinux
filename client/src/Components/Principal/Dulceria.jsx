@@ -59,6 +59,11 @@ const Dulceria = () => {
         };
         fetchData();
     }, []);
+
+
+    
+
+
     return (
         <div className="flex justify-center items-center min-h-screen mt-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">

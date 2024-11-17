@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { useSelector} from 'react-redux';
 
 const SedeHorario = () => {
   const [expanded, setExpanded] = useState(null);
   const [selectedDate, setSelectedDate] = useState('today');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
 
   const data = [
     {
@@ -96,6 +103,7 @@ const SedeHorario = () => {
     },
   ];
 
+  
   const toggleSede = (index) => {
     setExpanded(expanded === index ? null : index);
   };
@@ -103,6 +111,21 @@ const SedeHorario = () => {
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
+
+  const datos = useSelector((state) => state.entradaCompra);
+
+  const handleFuctionClick = (sede,hora) => {
+
+      dispatch(actualizarCompra({
+        ...datos,
+        nombrePelicula:"",
+        sede:sede,
+        fechaYhora: selectedDate + "--" + hora,
+
+    }));
+    navigate("/home/comprar/entradas");
+    
+  }
 
   return (
     <div className="p-4">
@@ -142,6 +165,7 @@ const SedeHorario = () => {
                         <button
                           key={j}
                           className="px-4 py-2 border rounded-md hover:bg-blue-100 flex items-center gap-2"
+                          onClick={()=> handleFuctionClick(sede.sede, funcion)}
                         >
                           {funcion}
                           <span className="text-blue-600">

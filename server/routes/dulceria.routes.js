@@ -5,8 +5,8 @@ import {getDulce, getDulces, registerDulce, deleteDulce} from "../controllers/du
 const router = Router();
 
 router.get('/dulces', getDulces);
-router.get('/dulces/:id', getDulce);
-router.post('/dulces', registerDulce);
-router.delete('/dulces/:id', deleteDulce);
+router.get('/dulce/:id', getDulce);
+router.post('/dulce', registerDulce);
+router.delete('/dulce/:id', deleteDulce);
 
 export default router;

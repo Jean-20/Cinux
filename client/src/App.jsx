@@ -4,7 +4,7 @@ import { AuthProvider } from './Components/Home/AuthContext'; // Asegúrate de q
 import Home from './Home'; // Asegúrate de que la ruta es correcta
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+import { Provider } from 'react-redux';
 
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/home/*" element={
               <Home/>
           }/>
-        </Routes> 
+        </Routes>
       </AuthProvider>
     </Router>
   );
