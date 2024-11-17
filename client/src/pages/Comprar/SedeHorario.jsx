@@ -1,8 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 const SedeHorario = () => {
@@ -10,7 +10,7 @@ const SedeHorario = () => {
   const [selectedDate, setSelectedDate] = useState('today');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
 
   const data = [
     {
@@ -104,7 +104,7 @@ const SedeHorario = () => {
     },
   ];
 
-  
+
   const toggleSede = (index) => {
     setExpanded(expanded === index ? null : index);
   };
@@ -115,21 +115,21 @@ const SedeHorario = () => {
 
   const datos = useSelector((state) => state.entradaCompra);
 
-  const handleFuctionClick = (sede,hora) => {
+  const handleFuctionClick = (sede, hora) => {
     const nuevosDatos = {
       ...datos,
       sede: sede,
       fechaYhora: selectedDate + " -- " + hora,
     };
 
-      dispatch(ingresoDatosCompra(nuevosDatos));
+    dispatch(ingresoDatosCompra(nuevosDatos));
     navigate("/home/comprar/asiento");
-    
+
   }
 
   return (
-    <div className="p-4">
-      <div className="mb-4">
+    <div className="p-10">
+      <div className="mb-10">
         <label className="block mb-2">Selecciona una fecha:</label>
         <select
           value={selectedDate}
@@ -165,7 +165,7 @@ const SedeHorario = () => {
                         <button
                           key={j}
                           className="px-4 py-2 border rounded-md hover:bg-blue-100 flex items-center gap-2"
-                          onClick={()=> handleFuctionClick(sede.sede, funcion)}
+                          onClick={() => handleFuctionClick(sede.sede, funcion)}
                         >
                           {funcion}
                           <span className="text-blue-600">

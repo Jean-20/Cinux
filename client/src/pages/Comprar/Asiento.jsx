@@ -17,7 +17,7 @@ const Asiento = () => {
 
 
   const toggleAsiento = (asiento) => {
-    if(asientosOcupados.includes(asiento)) return;
+    if (asientosOcupados.includes(asiento)) return;
 
     setAsientosSeleccionados((prev) =>
       prev.includes(asiento)
@@ -28,20 +28,20 @@ const Asiento = () => {
 
   const getClaseAsiento = (asiento) => {
     if (asientosSeleccionados.includes(asiento)) return 'bg-blue-500 text-white';
-    if(asientosOcupados.includes(asiento)) return 'bg-red-500 text-white';
+    if (asientosOcupados.includes(asiento)) return 'bg-red-500 text-white';
     return 'bg-white border border-gray-400';
   };
 
 
   const dispatch = useDispatch();
-  
-/*   useEffect(() => {
-    dispatch(actualizarCompra({
-      asientos: asientosSeleccionados,
-      cantidadAsientos: asientosSeleccionados.length,
-  }))
-  }, [asientosSeleccionados]); */
-  
+
+  /*   useEffect(() => {
+      dispatch(actualizarCompra({
+        asientos: asientosSeleccionados,
+        cantidadAsientos: asientosSeleccionados.length,
+    }))
+    }, [asientosSeleccionados]); */
+
   const handleFuctionClick = () => {
     const nuevosDatos = {
       ...datos,
@@ -51,14 +51,14 @@ const Asiento = () => {
 
     dispatch(ingresoDatosCompra(nuevosDatos));
     navigate("/home/comprar/entradas");
-    
+
   };
 
   return (
     <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-lg">
       {/* Encabezado de la pantalla */}
       <h2 className="text-2xl font-semibold mb-4">Pantalla</h2>
-      <div className="w-full h-2 bg-gray-300 mb-6"></div>
+      <div className="w-full h-2 bg-slate-950"></div>
 
       {/* Mapa de asientos */}
       <div className="flex flex-col items-center gap-2">
@@ -71,7 +71,7 @@ const Asiento = () => {
                 return (
                   <button
                     key={asiento}
-                    className={`w-10 h-10 flex items-center justify-center rounded-full hover:scale-105 transition-all ${getClaseAsiento(asiento)}`}
+                    className={`w-5 h-5 flex items-center justify-center rounded-full hover:scale-105 transition-all ${getClaseAsiento(asiento)}`}
                     onClick={() => toggleAsiento(asiento)}
                   />
                 );
@@ -106,7 +106,7 @@ const Asiento = () => {
         </p>
       </div>
 
-      <button onClick={()=>handleFuctionClick()} className="mt-6 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+      <button onClick={() => handleFuctionClick()} className="mt-6 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
         Siguiente
       </button>
     </div>

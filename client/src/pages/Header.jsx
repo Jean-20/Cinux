@@ -42,7 +42,7 @@ const Header = () => {
         <Link to="/login" className="text-white hover:bg-cyan-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-3 lg:px-4 py-2 lg:py-2.5 flex items-center">
           <FontAwesomeIcon icon={faUser} />
         </Link>
-        <Link to="/contactanos" className="text-white hover:bg-cyan-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-3 lg:px-4 py-2 lg:py-2.5 flex items-center">
+        <Link to="/home/contactanos" className="text-white hover:bg-cyan-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-3 lg:px-4 py-2 lg:py-2.5 flex items-center">
           <FontAwesomeIcon icon={faLaptop} />
         </Link>
       </div>
