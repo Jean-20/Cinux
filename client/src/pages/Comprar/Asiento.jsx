@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
-
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 /* import { getAsiestosOcupados } from '../../api/asientos'; */
+
 
 const filas = ['AA', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
 const columnas = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -10,6 +12,8 @@ const columnas = Array.from({ length: 12 }, (_, i) => i + 1);
 const Asiento = () => {
   const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
   const [asientosOcupados, setAsientosOcupados] = useState(['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10']);
+  const datos = useSelector((state) => state.entradaCompra);
+  const navigate = useNavigate();
 
 
   const toggleAsiento = (asiento) => {
@@ -31,15 +35,24 @@ const Asiento = () => {
 
   const dispatch = useDispatch();
   
-  useEffect(() => {
+/*   useEffect(() => {
     dispatch(actualizarCompra({
-      nombrePelicula:"",
       asientos: asientosSeleccionados,
       cantidadAsientos: asientosSeleccionados.length,
   }))
-  }, [asientosSeleccionados]);
+  }, [asientosSeleccionados]); */
   
-  
+  const handleFuctionClick = () => {
+    const nuevosDatos = {
+      ...datos,
+      asientos: asientosSeleccionados.join(', '),
+      cantidadAsientos: asientosSeleccionados.length,
+    };
+
+    dispatch(ingresoDatosCompra(nuevosDatos));
+    navigate("/home/comprar/entradas");
+    
+  };
 
   return (
     <div className="flex flex-col items-center p-6 bg-gray-50 rounded-lg shadow-lg">
@@ -93,7 +106,7 @@ const Asiento = () => {
         </p>
       </div>
 
-      <button className="mt-6 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+      <button onClick={()=>handleFuctionClick()} className="mt-6 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
         Siguiente
       </button>
     </div>

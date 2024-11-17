@@ -1,11 +1,25 @@
-// Pago.jsx
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {ingresoDatosCompra} from '../../Components/Redux/Compra/EntradaCompraSlice';
+
 
 const Pago = () => {
   const {register, handleSubmit} = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
+    const nuevosDatos = {
+      ...datos,
+      nombreCompleto,
+      numeroTarjeta,
+      fechaVencimiento,
+      cvv,
+    };
+
+    dispatch(ingresoDatosCompra(nuevosDatos));
+    navigate("/home");
   };
 
 

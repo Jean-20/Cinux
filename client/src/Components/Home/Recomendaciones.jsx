@@ -2,7 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@material-tailwind/react';
 import { getPeliculas } from '../../api/peliculas';
-
+ import { useNavigate } from 'react-router-dom'; 
+import { useDispatch } from 'react-redux';
+import { ingresoDatosCompra } from '../Redux/Compra/EntradaCompraSlice';
+import { useSelector } from 'react-redux';
 const Recomendaciones = () => {
     /* const peliculas = [
         {
@@ -72,6 +75,8 @@ const Recomendaciones = () => {
     ]; */
     const [peliculas, setPeliculas] = useState([]);
     const [loading, setLoading] = useState(true);
+     const navigate = useNavigate(); 
+    const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
         setLoading(true);
@@ -86,6 +91,18 @@ const Recomendaciones = () => {
         };
         fetchData();
     }, []);
+
+    const datos = useSelector((state) => state.entradaCompra);
+
+    const hadleClick = (pelicula) => {
+        dispatch(ingresoDatosCompra({
+            ...datos,
+            nombrePelicula:pelicula,
+        }));
+        console.log(datos);
+
+         navigate("/home/comprar/sedes"); 
+    }
 
 
     return (
@@ -118,12 +135,10 @@ const Recomendaciones = () => {
                         </div>
                         <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div className="flex space-x-4">
-                                <Link
-                                    to={`/home/comprar/sede`}
-                                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200"
-                                >
+                                <button onClick={()=>hadleClick(pelicula.nombre)} className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200">
                                     Comprar
-                                </Link>
+                                </button>
+                                
                                 
                                 <Link
                                     to={{

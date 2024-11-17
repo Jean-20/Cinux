@@ -18,9 +18,9 @@ export const ComprarP = () => {
       case 0:
         return "/home/comprar/sede";
       case 1:
-        return "/home/comprar/entradas";
-      case 2:
         return "/home/comprar/asiento";
+      case 2:
+        return "/home/comprar/entradas";
       case 3:
         return "/home/comprar/dulceria";
       case 4:

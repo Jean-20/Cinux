@@ -1,8 +1,9 @@
 import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 import { useSelector} from 'react-redux';
+
 
 const SedeHorario = () => {
   const [expanded, setExpanded] = useState(null);
@@ -115,15 +116,14 @@ const SedeHorario = () => {
   const datos = useSelector((state) => state.entradaCompra);
 
   const handleFuctionClick = (sede,hora) => {
+    const nuevosDatos = {
+      ...datos,
+      sede: sede,
+      fechaYhora: selectedDate + " -- " + hora,
+    };
 
-      dispatch(actualizarCompra({
-        ...datos,
-        nombrePelicula:"",
-        sede:sede,
-        fechaYhora: selectedDate + "--" + hora,
-
-    }));
-    navigate("/home/comprar/entradas");
+      dispatch(ingresoDatosCompra(nuevosDatos));
+    navigate("/home/comprar/asiento");
     
   }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 
 const Entradas = () => {
   const [cantidades, setCantidades] = useState({
@@ -21,6 +21,7 @@ const Entradas = () => {
     ninos: 34.00,
     mayores: 34.00,
   };
+  const [entradasComprados, setEntradasComprados] = useState([]);
 
   
 
@@ -41,39 +42,39 @@ const Entradas = () => {
   const dispatch = useDispatch();
   const datos = useSelector((state) => state.entradaCompra);
 
+  const entradas =[
+    {
+      nombre: "general",
+      tipoEntrada: "General 2D OL",
+      cantidad: cantidades.general,
+      precio: 36.00,
+    },
+    {
+      nombre: "ninos",
+      tipoEntrada: "Niños 2D OL",
+      cantidad: cantidades.ninos,
+      precio: 34.00,
+    },
+    {
+      nombre: "mayores",
+      tipoEntrada: "Mayores 2D OL",
+      cantidad: cantidades.mayores,
+      precio: 34.00,
+    },
+  ];
+
 
   const handleCompra = () => {
-    const entradas =[
-      {
-        nombre: "general",
-        tipoEntrada: "General 2D OL",
-        cantidad: cantidades.general,
-        precio: 36.00,
-      },
-      {
-        nombre: "ninos",
-        tipoEntrada: "Niños 2D OL",
-        cantidad: cantidades.ninos,
-        precio: 34.00,
-      },
-      {
-        nombre: "mayores",
-        tipoEntrada: "Mayores 2D OL",
-        cantidad: cantidades.mayores,
-        precio: 34.00,
-      },
-    ];
+const entradasCom = entradas.filter((entrada) => entrada.cantidad > 0);
     
+    setEntradasComprados(entradasCom);
 
-
-    const resumenCompra =  entradas.map((entrada) => ({
+    const resumenCompra =  entradasComprados.map((entrada) => ({
       ...datos,
-      nombrePelicula:"",
-      tipoEntrada: entrada.tipoEntrada,
-      cantidadAsientos: entrada.cantidad,
-      precioTotal: entrada.precio * entrada.cantidad,
+      tipoEntrada: "entrada.tipoEntrada",
+      precioTotal: "entrada.precio * entrada.cantidad",
     }))
-    dispatch(actualizarCompra(resumenCompra));
+    dispatch(ingresoDatosCompra(resumenCompra));
     navigate("/home/comprar/asiento");
   };
 

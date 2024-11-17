@@ -1,9 +1,10 @@
 // Dulceria.jsx
 import React, { useState } from 'react';
 import { useDispatch} from 'react-redux';
-import { actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 
 const Dulceria = () => {
   const [cantidades, setCantidades] = useState({
@@ -60,14 +61,16 @@ const Dulceria = () => {
 
   
 
-  const handleContinuar = () => {
-    dispatch(actualizarCompra({
+  const handleFuctionClick = () => {
+    const nuevosDatos = {
       ...datos,
-      nombrePelicula:"",
-      dulceria: dulce,
-      }));
-      navigate("/home/comprar/pago");
-  };
+      dulceria: cantidades,
+    };
+
+      dispatch(ingresoDatosCompra(nuevosDatos));
+    navigate("/home/comprar/pagar");
+    
+  }
 
 
   return (
@@ -106,7 +109,7 @@ const Dulceria = () => {
 
       <div className="mt-6 flex justify-center">
         <button
-          onClick={handleContinuar}
+          onClick={()=>handleFuctionClick(combo.nombre)}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar
