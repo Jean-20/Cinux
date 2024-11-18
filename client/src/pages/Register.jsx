@@ -1,79 +1,89 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../Components/Home/AuthContext';
+import {registerUser, loginUser} from '../api/users';
+import { useForm } from 'react-hook-form';
+
 
 const Register = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const {register, handleSubmit, formState: {errors} } = useForm();
     const navigate = useNavigate();
-    const { login } = useAuth(); 
-    const handleRegister = (e) => {
-        e.preventDefault();
-        console.log('Nombre:', name);
-        console.log('Email:', email);
-        console.log('Password:', password);
-        console.log('Confirm Password:', confirmPassword);
 
-        if (password !== confirmPassword) {
+    const onSubmit = async(data) =>{
+        if (data.password !== data.confirmacionContraseña) {
             alert('Las contraseñas no coinciden');
             return;
         }
 
+        try{
+            const res = await registerUser({
+                nombre: data.nombre,
+                email: data.correo,
+                password: data.password,
+                date: new Date().toISOString(),
+            })
+            
+            if(res.status === 200){
+                await loginUser({
+                    nombre: data.nombre,
+                    email: data.correo,
+                    password: data.password,
+                });
 
-        login();
-        navigate('/'); 
+            navigate('/home');
+            }
+        }catch(error){
+            console.error('Error registrando usuario:', error);
+    }
     };
+
 
     return (
         <section className="flex flex-col justify-center items-center min-h-screen bg-black text-white">
             <div className="m-5 p-5 bg-black text-white rounded-lg shadow-md max-w-md w-full">
                 <h3 className="text-3xl font-bold mb-4">Crear Cuenta</h3>
-                <form className="grid grid-cols-1 gap-4 w-full" onSubmit={handleRegister}>
+                <form className="grid grid-cols-1 gap-4 w-full" onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <label htmlFor="name" className="block text-gray-300">Nombre</label>
                         <input
                             id="name"
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            {...register ('nombre', {required: true})}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
+                        {errors.nombre && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-gray-300">Correo Electrónico</label>
                         <input
                             id="email"
                             type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            {...register ('correo', {required: true})}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
+                        {errors.correo && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-gray-300">Contraseña</label>
                         <input
                             id="password"
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            {...register ('password', {required: true})}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
+                        {errors.password && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div>
                         <label htmlFor="confirm-password" className="block text-gray-300">Confirmar Contraseña</label>
                         <input
                             id="confirm-password"
                             type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            {...register ('confirmacionContraseña', {required: true})}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
+                        {errors.confirmacionContraseña && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div className="text-center">
                         <button
