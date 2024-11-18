@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons'; // Importa el icono de usuario
-import { faLaptop } from '@fortawesome/free-solid-svg-icons'; // Importa el icono de laptop
+import { faUser, faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = (menu) => {
     setActiveMenu(activeMenu === menu ? null : menu);
@@ -13,32 +13,46 @@ const Header = () => {
 
   const closeMenu = () => {
     setActiveMenu(null);
+    setMenuOpen(false);
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-red-600 shadow-lg flex items-center justify-between px-8 py-4 z-50">
-      <h1 className="text-2xl font-bold text-white">
+    <header className="fixed top-0 left-0 w-full bg-red-600 shadow-lg flex items-center justify-between px-4 py-3 md:px-8 md:py-4 z-50">
+      <h1 className="text-xl md:text-2xl font-bold text-white">
         <Link to="/" className="hover:text-black transition duration-200">Cinux</Link>
       </h1>
 
-      <nav className="nav font-semibold text-lg text-white flex-grow">
-        <ul className="flex items-center justify-center space-x-6">
-          <li className="relative group">
-            <Link to="/home" className="hover:text-black  transition duration-200" onClick={closeMenu}>Home</Link>
+      <button
+        className="text-white md:hidden"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <FontAwesomeIcon icon={faBars} />
+      </button>
+
+      <nav className={`nav font-semibold text-lg text-white flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center`}>
+        <ul className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+          <li>
+            <Link to="/home" className="hover:text-black transition duration-200" onClick={closeMenu}>Home</Link>
           </li>
-          <li className="relative group">
-            <Link to="/home/peliculas" className="hover:text-black  transition duration-200" onClick={closeMenu}>Películas</Link>
+          <li>
+            <Link to="/home/peliculas" className="hover:text-black transition duration-200" onClick={closeMenu}>Películas</Link>
           </li>
-          <li className="relative group">
-            <Link to="/home/sedes" className="hover:text-black  transition duration-200" onClick={closeMenu}>Sedes</Link>
+          <li>
+            <Link to="/home/sedes" className="hover:text-black transition duration-200" onClick={closeMenu}>Sedes</Link>
           </li>
-          <li className="relative group">
-            <Link to="/home/dulceria" className="hover:text-black  transition duration-200" onClick={closeMenu}>Dulcería</Link>
+          <li>
+            <Link to="/home/dulceria" className="hover:text-black transition duration-200" onClick={closeMenu}>Dulcería</Link>
+          </li>
+          <li className="md:hidden">
+            <Link to="/login" className="hover:text-black transition duration-200" onClick={closeMenu}>
+              <FontAwesomeIcon icon={faUser} className="mr-2" />
+              Login
+            </Link>
           </li>
         </ul>
       </nav>
 
-      <div className="flex items-center space-x-2"> {/* Reducido el espacio entre los íconos */}
+      <div className="hidden md:flex items-center space-x-2">
         <Link to="/login" className="text-white hover:bg-black focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-3 lg:px-4 py-2 lg:py-2.5 flex items-center">
           <FontAwesomeIcon icon={faUser} />
         </Link>

@@ -128,7 +128,7 @@ const SedeHorario = () => {
   }
 
   return (
-    <div className="p-5 w-[600px] bg-white">
+    <div className="p-5 w-[900px] bg-white mt-5">
       <div className="mb-2">
         <label className="block mb-2">Selecciona una fecha:</label>
         <select
