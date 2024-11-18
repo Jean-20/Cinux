@@ -2,46 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from '@material-tailwind/react';
 import { getDulces } from '../../api/dulceria';
 
-
-/* const DulceriaData = [
-    {
-        id: 1,
-        nombre: "Chocolate Milka",
-        categoria: "Dulces",
-        precio: "$2.50",
-        stock: "100",
-        descripcion: "Delicioso chocolate con un sabor suave y cremoso.",
-        url: "https://images.unsplash.com/photo-1610444731753-85b4b0ae7a36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    },
-    {
-        id: 2,
-        nombre: "Gomitas de Frutas",
-        categoria: "Golosinas",
-        precio: "$1.99",
-        stock: "200",
-        descripcion: "Gomitas frescas en forma de frutas, llenas de sabor.",
-        url: "https://images.unsplash.com/photo-1586511989526-2e3a905ca2de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    },
-    {
-        id: 3,
-        nombre: "Caramelos de Menta",
-        categoria: "Caramelos",
-        precio: "$1.50",
-        stock: "150",
-        descripcion: "Refrescantes caramelos de menta, perfectos para cualquier ocasión.",
-        url: "https://images.unsplash.com/photo-1574304088896-c53c6b6b6059?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    },
-    {
-        id: 4,
-        nombre: "Palomitas de Maíz",
-        categoria: "Snacks",
-        precio: "$3.00",
-        stock: "80",
-        descripcion: "Palomitas de maíz recién hechas, perfectas para ver una película.",
-        url: "https://images.unsplash.com/photo-1602041591672-7e95b00ab0d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1160&q=80"
-    }
-]; */
-
 const Dulceria = () => {
     const [dulces, setDulces] = useState([]);
     const [loading, setLoading] = useState(true);

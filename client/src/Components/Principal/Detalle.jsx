@@ -1,42 +1,36 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getPelicula } from '../../api/peliculas';
 import { useParams } from 'react-router-dom';
 import SedeHorario from '../../pages/Comprar/SedeHorario';
 
-
 const DetallePelicula = () => {
-    const [pelicula, setPelicula] = useState([]);
+    const [pelicula, setPelicula] = useState(null);
     const { id } = useParams();
-    useEffect(() => {  
-        const fetchPelicula = async() =>{
+
+    useEffect(() => {
+        const fetchPelicula = async () => {
             const res = await getPelicula(id);
             setPelicula(res);
-
-        } 
+        };
         fetchPelicula();
-    }, []);
-
-        
-
+    }, [id]);
 
     if (!pelicula) {
         return <p>No se encontró información de la película.</p>;
     }
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100">
-            <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden mt-10" key={pelicula._id}>
-                {/* Imagen de la película */}
-                <img src={pelicula.url} alt={pelicula.nombre} className="w-full h-96 object-cover" />
-                <div className="p-6">
-                    <h2 className="text-3xl font-bold text-gray-800">{pelicula.nombre}</h2>
-                    <h3 className="text-3xl font-bold text-gray-800">{pelicula.nombre}</h3>
-                    <h3 className="text-3xl font-bold text-gray-800">{pelicula.productora}</h3>
-                    <p className="text-gray-600 mt-2">{pelicula.descripcion}</p>
+        <div className="flex flex-col items-center min-h-screen bg-gray-100 mt-20 my-10">
+            <div className="max-w-4xl w-full bg-black shadow-lg rounded-lg overflow-hidden mt-10 flex flex-col md:flex-row">
+                <img src={pelicula.url} alt={pelicula.nombre} className="w-[500px] h-[700px] object-cover" />
+                <div className="p-6 md:w-1/2">
+                    <h1 className="text-3xl font-bold text-white">{pelicula.nombre}</h1>
+                    <p className="text-xl font-semibold text-white mt-2">{pelicula.categoria}</p>
+                    <p className="text-lg text-white mt-2">{pelicula.productora}</p>
+                    <p className="text-base text-white mt-4">{pelicula.descripcion}</p>
                 </div>
             </div>
-            <SedeHorario></SedeHorario>
+            <SedeHorario />
         </div>
     );
 };
