@@ -14,7 +14,7 @@ export const getUsers = async () => {
 
 export const getUser = async (id) => {
     try {
-        const response = await axios.get(`${API}/api/pelicula/${id}`);
+        const response = await axios.get(`${API}/api/usuario/${id}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching user:', error);
@@ -23,11 +23,11 @@ export const getUser = async (id) => {
 }
 
 export const registerUser = (user) => { 
-    return axios.post(`${API}/api/pelicula`,user);
+    return axios.post(`${API}/api/usuario`,user);
 }
 
 export const deleteUser = (id) => {
-    return axios.delete(`${API}/pelicula/${id}`);
+    return axios.delete(`${API}/api/usuario/${id}`);
 }
 
 

@@ -1,38 +1,37 @@
 import { Link, useNavigate } from 'react-router-dom';
 import {registerUser, loginUser} from '../api/users';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
 
 
 const Register = () => {
     const {register, handleSubmit, formState: {errors} } = useForm();
+    const [showModal, setShowModal] = useState(false);
+
     const navigate = useNavigate();
 
-    const onSubmit = async(data) =>{
+    const onSubmit = async (data) => {
         if (data.password !== data.confirmacionContraseña) {
             alert('Las contraseñas no coinciden');
             return;
         }
 
-        try{
+        try {
             const res = await registerUser({
                 nombre: data.nombre,
-                email: data.correo,
+                email: data.email,
                 password: data.password,
-                date: new Date().toISOString(),
-            })
+            });
             
-            if(res.status === 200){
-                await loginUser({
-                    nombre: data.nombre,
-                    email: data.correo,
-                    password: data.password,
-                });
-
-            navigate('/home');
-            }
-        }catch(error){
+            setShowModal(true);
+            setTimeout(() => {
+                setShowModal(false);
+                navigate('/login');
+            }, 2000);
+        } catch (error) {
             console.error('Error registrando usuario:', error);
-    }
+        }
     };
 
 
@@ -57,11 +56,11 @@ const Register = () => {
                         <input
                             id="email"
                             type="email"
-                            {...register ('correo', {required: true})}
+                            {...register ('email', {required: true})}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
-                        {errors.correo && <span className="text-red-500">Este campo es requerido</span>}
+                        {errors.email && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-gray-300">Contraseña</label>
@@ -101,6 +100,16 @@ const Register = () => {
                     </Link>
                 </div>
             </div>
+            {showModal && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white p-5 rounded-lg shadow-lg text-center">
+                    <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <h2 className="text-xl font-bold">Registro exitoso</h2>
+                </div>
+            </div>
+            )}
         </section>
     );
 };

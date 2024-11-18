@@ -1,14 +1,16 @@
 import User from '../models/user.model.js';
+/* import { createAssessToken } from '../libs/jwt.js'; */
+import bcrypt from 'bcryptjs';
 
 export const login = async (req, res) => {
-    const {userName, password} = req.body;
+    const {email, password} = req.body;
 
-    if (!userName || !password) {
+    if (!email || !password) {
         return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
     }
 
     try {
-        const user = await User.findOne({ userName });
+        const user = await Auth.findOne({ userName });
 
         if (!user) {
             return res.status(400).json({ mensaje: 'Usuario no encontrado' });
@@ -20,10 +22,10 @@ export const login = async (req, res) => {
             return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
         }
 
-        const token = createAssessToken({ id: user._id });
-        res.cookie("token", token)
+/*         const token = createAssessToken({ id: user._id });
+        res.cookie("token", token) */
 
-        return res.status(200).json({token});
+        return res.status(200).json();
 
     } catch (error) {
         res.status(500).json({ mensaje: error.message });

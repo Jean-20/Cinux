@@ -3,10 +3,9 @@ import {getUser, getUserNombre, postUser, deleteUser} from "../controllers/user.
 
 const router = Router();
 
-router.post("/cuentas/login", )
-router.get("/cuentas/usuarios",getUser);
-router.get("/cuentas/usuarios/:id",getUserNombre);
-router.post("/cuentas/usuarios",postUser);
-router.delete("/cuentas/usuarios/:id",deleteUser);
+router.get("/usuarios",getUser);
+router.get("/usuario/:id",getUserNombre);
+router.post("/usuario",postUser);
+router.delete("/usuario/:id",deleteUser);
 
 export default router;

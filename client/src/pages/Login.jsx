@@ -1,34 +1,40 @@
-import { useState } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../Components/Home/AuthContext';
+import { useForm } from 'react-hook-form';
+import { loginUser } from '../api/users';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const { login } = useAuth();
+    const { register, handleSubmit } = useForm();
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
 
-        login();
-        navigate('/');
+    const handleLogin = async (data) => {
+            try {
+                const res = await loginUser({
+                    email: data.email,
+                    password: data.password,
+                });
+
+                if (res.status === 200) {
+                    navigate('/home');
+                }
+            } catch (error) {
+                console.error('Error registrando usuario:', error);
+            }
     };
+
 
     return (
         <section className="flex flex-col justify-center items-center min-h-screen bg-black text-white">
             <div className="m-5 p-5 bg-black text-white rounded-lg shadow-md max-w-md w-full">
                 <h3 className="text-3xl font-bold mb-4">Iniciar Sesión</h3>
-                <form className="grid grid-cols-1 gap-4 w-full" onSubmit={handleLogin}>
+                <form className="grid grid-cols-1 gap-4 w-full" onSubmit={handleSubmit(handleLogin)}>
                     <div>
                         <label htmlFor="email" className="block text-gray-300">Correo Electrónico</label>
                         <input
                             id="email"
+                            {...register ('email', {required: true})}
                             type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
@@ -37,9 +43,8 @@ const Login = () => {
                         <label htmlFor="password" className="block text-gray-300">Contraseña</label>
                         <input
                             id="password"
+                            {...register ('password', {required: true})}
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />

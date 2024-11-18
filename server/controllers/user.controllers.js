@@ -1,7 +1,6 @@
 import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 
-
 export const getUser = async (req, res) => {
     const foundUsers = await User.find();
     if(!foundUsers){
@@ -23,13 +22,6 @@ export const getUserNombre = async (req,res) =>{
         res.status(500).json({ mensaje: error.message });
     }
 }
-export const getAdmins = async (req, res) => {
-    const foundAdmins = await Auth.find();
-    if(!foundAdmins){
-        return res.status(404).json({mansaje: 'Aun no se ha creado nada aqui'})
-    }
-    res.json(foundAdmins);
-} 
 
 export const postUser = async (req,res)=>{
     const {nombre, email, password} = req.body;
@@ -40,6 +32,7 @@ export const postUser = async (req,res)=>{
 
      try {
         const passwordCrypt = await bcrypt.hash(password, 10);
+        
         const newUser = new User({
             nombre,
             email,
@@ -77,35 +70,7 @@ export const deleteUser = async (req, res) => {
     }
   };
 
-  export const loginUser = async (req, res) => {
-    const {email, password} = req.body;
-
-    if (!email || !password) {
-        return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
-    }
-
-    try {
-        const user = await Auth.findOne({ userName });
-
-        if (!user) {
-            return res.status(400).json({ mensaje: 'Usuario no encontrado' });
-        }
-
-        const passwordMatch = await bcrypt.compare(password, user.password);
-
-        if (!passwordMatch) {
-            return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
-        }
-
-        const token = createAssessToken({ id: user._id });
-        res.cookie("token", token)
-
-        return res.status(200).json({token});
-
-    } catch (error) {
-        res.status(500).json({ mensaje: error.message });
-    }
-}
+  
 
 
 
