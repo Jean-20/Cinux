@@ -4,7 +4,7 @@ const API = "http://localhost:3500" //import.meta.env.VITE_API_URL;
 
 export const getUsers = async () => {
     try {
-      const response = await axios.get(`${API}/api/peliculas`);
+      const response = await axios.get(`${API}/api/usuarios`);
       return response.data;
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -12,29 +12,22 @@ export const getUsers = async () => {
     }
   };
 
-export const getUser = async (id) => {
+export const getUser = async (email) => {
     try {
-        const response = await axios.get(`${API}/api/usuario/${id}`);
+        const response = await axios.get(`${API}/api/usuario/${email}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching user:', error);
         return [];
     }
 }
-
 export const registerUser = (user) => { 
-    return axios.post(`${API}/api/usuario`,user);
+  return axios.post(`${API}/api/usuario`,user);
 }
 
 export const deleteUser = (id) => {
-    return axios.delete(`${API}/api/usuario/${id}`);
+  return axios.delete(`${API}/api/usuario/${id}`);
 }
 
 
-export const loginUser = (user) => {
-  return axios.post(`${API}/api/auth/login`, user);
-};
 
-export const logoutUser = () => {
-  return axios.post(`${API}/api/auth/logout`);
-};

@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  nombre: "",
+  email: "",
+  nombreCompletoUsuario: "",
+  numeroTarjetaUsuario: "",
+  fechaVencimientoUsuario: "",
+  CVV: "",
   nombrePelicula: "",
   sede: "",
   fechaYhora: "",

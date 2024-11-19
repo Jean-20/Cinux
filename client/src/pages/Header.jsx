@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBars } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-
+  const [menuOpen, setMenuOpen] = useState(true);
+  const [nombrePag, setNombrePag] = useState('');
   const toggleMenu = (menu) => {
     setActiveMenu(activeMenu === menu ? null : menu);
   };
@@ -15,6 +16,11 @@ const Header = () => {
     setActiveMenu(null);
     setMenuOpen(false);
   };
+
+  const usuario = useSelector((state) => state.usuario);
+  if(usuario === null) {
+    setMenuOpen(true)
+  }
 
   return (
     <header className="fixed top-0 left-0 w-full bg-red-600 shadow-lg flex items-center justify-between px-4 py-3 md:px-8 md:py-4 z-50">
@@ -53,10 +59,12 @@ const Header = () => {
       </nav>
 
       <div className="hidden md:flex items-center space-x-2">
+        <h2>Hola {usuario.nombre}!!</h2>
         <Link to="/login" className="text-white hover:bg-black focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-3 lg:px-4 py-2 lg:py-2.5 flex items-center">
           <FontAwesomeIcon icon={faUser} />
         </Link>
       </div>
+      
     </header>
   );
 };

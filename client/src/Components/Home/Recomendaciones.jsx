@@ -41,7 +41,12 @@ const Recomendaciones = () => {
         navigate("/home/comprar/sedes");
     }
 
-    const hadleDetalles = (id) => {
+    const hadleDetalles = (id, pelicula) => {
+        dispatch(ingresoDatosCompra({
+            ...datos,
+            nombrePelicula: pelicula,
+        }));
+        console.log(datos);
         navigate("/home/pelicula/detalles/" + id);
     }
 
@@ -80,7 +85,7 @@ const Recomendaciones = () => {
                                             Comprar
                                         </button>
 
-                                        <button onClick={() => hadleDetalles(pelicula._id)} className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
+                                        <button onClick={() => hadleDetalles(pelicula._id,pelicula.nombre)} className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
                                             Más detalles
                                         </button>
                                     </div>

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
-
 const Entradas = () => {
+  const [cantidadMax, setCantidadMax] = useState(0);
+  const [cantidadReparto, setCantidadReparto] = useState(0);
   const [cantidades, setCantidades] = useState({
     general: 0,
     ninos: 0,
     mayores: 0,
   });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [entradasComprados, setEntradasComprados] = useState([]);
+  const resumenCompra = useSelector((state) => state.entradaCompra);
 
   const [tipoEntrada, setTipoEntrada] = useState({
     general: "General",
@@ -21,14 +26,26 @@ const Entradas = () => {
     ninos: 34.00,
     mayores: 34.00,
   };
-  const [entradasComprados, setEntradasComprados] = useState([]);
 
+  
+  useEffect(() => {
+    setCantidadMax(resumenCompra.cantidadAsientos);
+    setCantidadReparto(resumenCompra.cantidadAsientos);
+  }, [resumenCompra]);
   
 
   
   
   const handleIncrementar = (tipo) => {
-    setCantidades((prev) => ({ ...prev, [tipo]: prev[tipo] + 1 }));
+    if(cantidadReparto > 0){
+      setCantidades((prev) => ({ 
+        ...prev, 
+        [tipo]: prev[tipo] + 1 > cantidadMax ? cantidadMax  : prev[tipo] + 1 ,
+    }));
+    setCantidadReparto((prev) => prev - 1);
+
+    }
+    
   };
 
   const handleDecrementar = (tipo) => {
@@ -36,10 +53,10 @@ const Entradas = () => {
       ...prev,
       [tipo]: prev[tipo] > 0 ? prev[tipo] - 1 : 0,
     }));
+    setCantidadReparto((prev) => prev + 1);
   };
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  
   const datos = useSelector((state) => state.entradaCompra);
 
   const entradas =[
@@ -47,36 +64,49 @@ const Entradas = () => {
       nombre: "general",
       tipoEntrada: "General 2D OL",
       cantidad: cantidades.general,
-      precio: 36.00,
+      precio: cantidades.general * 36.00,
     },
     {
       nombre: "ninos",
       tipoEntrada: "Niños 2D OL",
       cantidad: cantidades.ninos,
-      precio: 34.00,
+      precio: cantidades.ninos * 34.00,
     },
     {
       nombre: "mayores",
       tipoEntrada: "Mayores 2D OL",
       cantidad: cantidades.mayores,
-      precio: 34.00,
+      precio: cantidades.mayores * 34.00,
     },
   ];
 
+  const [recolecionEntradas, setRecolecionEntradas] = useState();
+  const [recoleccionPrecio, setRecoleccionPrecio] = useState();
+
 
   const handleCompra = () => {
-  const entradasCom = entradas.filter((entrada) => entrada.cantidad > 0);
-    
-    setEntradasComprados(entradasCom);
-
-    const resumenCompra =  entradasComprados.map((entrada) => ({
+    let entradasCompradas = "";
+    let precioTotal = 0;
+  
+    entradas.forEach((entrada) => {
+      if (entrada.cantidad > 0) {
+        entradasCompradas += `${entrada.tipoEntrada} `;
+        precioTotal += entrada.precio;
+      }
+    });
+  
+    setRecolecionEntradas(entradasCompradas.trim());
+    setRecoleccionPrecio(precioTotal);
+  
+    dispatch(ingresoDatosCompra({
       ...datos,
-      tipoEntrada: "entrada.tipoEntrada",
-      precioTotal: "entrada.precio * entrada.cantidad",
-    }))
-    dispatch(ingresoDatosCompra(resumenCompra));
+      tipoEntrada: entradasCompradas.trim(),
+      precioTotal: precioTotal,
+    }));
+  
     navigate("/home/comprar/dulceria");
   };
+  
 
   return (
     <div className="p-8 bg-white rounded-lg shadow-lg w-full max-w-4xl mx-auto">
@@ -159,7 +189,7 @@ const Entradas = () => {
       {/* Botón Continuar */}
       <div className="mt-6 flex justify-center">
         <button
-          onClick={()=>handleCompra}
+          onClick={()=> handleCompra()}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar

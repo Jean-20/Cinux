@@ -1,7 +1,7 @@
 // Dulceria.jsx
 import React, { useState } from 'react';
 import { useDispatch} from 'react-redux';
-import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { ingresoDatosCompra, actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -61,16 +61,32 @@ const Dulceria = () => {
 
   
 
-  const handleFuctionClick = () => {
-    const nuevosDatos = {
-      ...datos,
-      dulceria: cantidades,
-    };
+  const [recolecionDulces, setRecolecionDulces] = useState();
+  const [recoleccionPrecio, setRecoleccionPrecio] = useState();
+  const resumenCompra = useSelector((state) => state.entradaCompra);
 
-      dispatch(ingresoDatosCompra(nuevosDatos));
-    navigate("/home/comprar/pagar");
-    
-  }
+
+  const handleCompra = () => {
+    let dulcesCompradas = "";
+    let precioTotal = 0;
+  
+    combos.forEach((dulce) => {
+      dulcesCompradas += `${dulce.nombre} `;
+        precioTotal += dulce.precio;
+    });
+  
+    setRecolecionDulces(dulcesCompradas.trim());
+    setRecoleccionPrecio(precioTotal);
+
+    dispatch(actualizarCompra({
+      ...datos,
+      dulceria: dulcesCompradas.trim(),
+      precioTotal: resumenCompra.precioTotal + precioTotal,
+  }))
+    ;
+  
+    navigate("/home/comprar/pago");
+  };
 
 
   return (
@@ -109,7 +125,7 @@ const Dulceria = () => {
 
       <div className="mt-6 flex justify-center">
         <button
-          onClick={()=>handleFuctionClick(combo.nombre)}
+          onClick={()=>handleCompra()}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar

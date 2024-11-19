@@ -2,27 +2,48 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ingresoDatosCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { ingresoDatosCompra, removeCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
+import { useSelector } from 'react-redux';
+import { createVentaDeEntrada } from '../../api/ventaDeEntradas';
 
 const Pago = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-
-  const onSubmit = (data) => {
+  const data = useSelector((state) => state.entradaCompra);
+  
+  const onSubmit = async(dataCard) => {
     console.log(data);
     const nuevosDatos = {
       ...data,
+      nombreCompletoUsuario: dataCard.nombreCompleto,
+      numeroTarjetaUsuario: dataCard.numeroTarjeta,
+      fechaVencimientoUsuario: dataCard.fechaVencimiento,
+      CVV: dataCard.cvv,
     };
 
+    
+
     dispatch(ingresoDatosCompra(nuevosDatos));
+
+    try{
+      await createVentaDeEntrada(nuevosDatos);
+      removeCompra();
     setShowModal(true);
     setTimeout(() => {
+      
       setShowModal(false);
       navigate("/home");
+      
+      
     }, 2000);
+    
+    }catch (error) {
+      console.error('Error registrando usuario:', error);
+    
   };
+}
 
   return (
     <section className="py-8 antialiased bg-gray-100 md:py-8 rounded-lg">

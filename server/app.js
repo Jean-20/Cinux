@@ -1,12 +1,14 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
+import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import peliculasRoutes from './routes/peliculas.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import dulceriaRoutes from './routes/dulceria.routes.js'
 import sedesRoutes from './routes/sedes.routes.js'
-import cors from 'cors';
-import dotenv from 'dotenv';
+import ventaDeEntradasRoutes from './routes/ventaDeEntradas.routes.js'
+
 
 
 const app = express();
@@ -31,6 +33,7 @@ app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api', dulceriaRoutes);
 app.use('/api', sedesRoutes);
+app.use('/api', ventaDeEntradasRoutes);
 
 
 app.use((err, req, res, next) => {

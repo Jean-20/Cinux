@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ingresoDatosCompra } from '../Redux/Compra/EntradaCompraSlice';
+import { useSelector } from 'react-redux';
 const Carrusel = () => {
     const [activeIndex, setActiveIndex] = useState(0); // Start with the first image
 
@@ -33,6 +36,18 @@ const Carrusel = () => {
     const handleNext = () => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const datos = useSelector((state) => state.entradaCompra);
+    const handleClick = (pelicula) => {
+        dispatch(ingresoDatosCompra({
+            ...datos,
+            nombrePelicula: pelicula,
+        }));
+        console.log(datos);
+
+        navigate("/home/comprar/sedes");
+    }
 
     return (
         <div id="animation-carousel" className="relative h-full pt-20 bg-white mx-5">
@@ -51,7 +66,7 @@ const Carrusel = () => {
                         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4">
                             <h2 className="text-white text-2xl">{image.title}</h2>
                             <p className="text-white">{image.description}</p>
-                            <button className="mt-2 px-4 py-2 bg-red-600 text-white rounded">Comprar</button>
+                            <button className="mt-2 px-4 py-2 bg-red-600 text-white rounded" onClick = {()=> handleClick(image.title)}>Comprar</button>
                         </div>
                     </div>
                 ))}

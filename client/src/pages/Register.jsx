@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import {registerUser, loginUser} from '../api/users';
+import {registerUser} from '../api/users';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 

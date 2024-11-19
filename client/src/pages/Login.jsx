@@ -1,29 +1,51 @@
-
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { loginUser } from '../api/users';
+import { loginUser } from '../api/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import {getUser} from '../api/users';
+import { ingresoDatosUsuario } from '../Components/Redux/Usuario/UsuarioSilce.jsx';
+import { ingresoDatosCompra } from '../Components/Redux/Compra/EntradaCompraSlice.jsx';
+
 
 const Login = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit } = useForm();
-
+    const { register, handleSubmit, formState: {errors} } = useForm();
+    const dispatch = useDispatch();
+    const datoss = useSelector((state) => state.usuario);
+    const data = useSelector((state) => state.entradaCompra);
 
     const handleLogin = async (data) => {
-            try {
-                const res = await loginUser({
-                    email: data.email,
-                    password: data.password,
-                });
+        try {
+          const res = await loginUser({
+            email: data.email,
+            password: data.password,
+          });
+    
+          if (res.status === 200) {
+            const datos = await getUser(data.email);
+            const nuevosDatos = {
+              ...datoss,
+              nombre: datos.nombre,
+              email: datos.email,
+              password: datos.password,
+            };
+            const nuevosDatosG = {
+                ...data,
+                nombre: datos.nombre,
+                email: datos.email,
+              };
+            dispatch(ingresoDatosCompra(nuevosDatosG));
+            dispatch(ingresoDatosUsuario(nuevosDatos));
+            console.log(datoss);
+            console.log(data);
 
-                if (res.status === 200) {
-                    navigate('/home');
-                }
-            } catch (error) {
-                console.error('Error registrando usuario:', error);
-            }
-    };
-
-
+            navigate('/home');
+          }
+        } catch (error) {
+          console.error('Error registrando usuario:', error);
+        }
+      };
+    
     return (
         <section className="flex flex-col justify-center items-center min-h-screen bg-black text-white">
             <div className="m-5 p-5 bg-black text-white rounded-lg shadow-md max-w-md w-full">
@@ -38,6 +60,7 @@ const Login = () => {
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
+                        {errors.email && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-gray-300">Contraseña</label>
@@ -48,6 +71,7 @@ const Login = () => {
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
+                        {errors.password && <span className="text-red-500">Este campo es requerido</span>}
                     </div>
                     <div className="text-center">
                         <button
