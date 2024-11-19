@@ -20,7 +20,7 @@ const DetallePelicula = () => {
     }
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 mt-20 my-10">
+        <div className="flex flex-col items-center min-h-screen bg-gray-100 mt-20">
             <div className="max-w-4xl w-full bg-black shadow-lg rounded-lg overflow-hidden mt-10 flex flex-col md:flex-row">
                 <img src={pelicula.url} alt={pelicula.nombre} className="w-[500px] h-[700px] object-cover" />
                 <div className="p-6 md:w-1/2">

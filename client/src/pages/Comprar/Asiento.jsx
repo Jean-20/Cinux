@@ -11,7 +11,7 @@ const columnas = Array.from({ length: 12 }, (_, i) => i + 1);
 
 const Asiento = () => {
   const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
-  const [asientosOcupados, setAsientosOcupados] = useState(['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10']);
+  const [asientosOcupados, setAsientosOcupados] = useState(['A1', 'A2', 'D3', 'D4', 'A5', 'K11', 'K12', 'F8', 'F9', 'I10']);
   const datos = useSelector((state) => state.entradaCompra);
   const navigate = useNavigate();
 
@@ -55,10 +55,10 @@ const Asiento = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-2 bg-gray-50 rounded-lg shadow-lg w-[800]">
+    <div className="flex flex-col items-center p-2 bg-gray-50 rounded-lg shadow-lg w-[800] ">
       <div className='flex flex-row gap-10'>
         <div>
-          <h2 className="text-2xl font-semibold mb-4">Pantalla</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-center">Pantalla</h2>
           <div className="w-full h-2 bg-slate-950"></div>
 
           {/* Mapa de asientos */}
@@ -84,7 +84,7 @@ const Asiento = () => {
           </div>
         </div>
         {/* Encabezado de la pantalla */}
-        
+
 
         {/* Leyenda de asientos */}
         <div>
@@ -112,7 +112,7 @@ const Asiento = () => {
           </div>
         </div>
       </div>
-      <button onClick={() => handleFuctionClick()} className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+      <button onClick={() => handleFuctionClick()} className="m-5 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
         Siguiente
       </button>
     </div>

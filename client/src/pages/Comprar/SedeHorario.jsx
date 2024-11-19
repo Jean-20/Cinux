@@ -14,7 +14,7 @@ const SedeHorario = () => {
 
   const data = [
     {
-      sede: 'CP Alcazar',
+      sede: 'Cinux Plaza Norte',
       horarios: {
         hoy: [
           {
@@ -28,14 +28,14 @@ const SedeHorario = () => {
         ],
         mañana: [
           {
-            tipo: '2D REGULAR SUBTITULADA',
+            tipo: 'Cinux Real Plaza',
             funciones: ['05:00 pm', '07:00 pm'],
           },
         ],
       },
     },
     {
-      sede: 'CP Arequipa Mall Plaza',
+      sede: 'Cinux Arequipa',
       horarios: {
         hoy: [
           {
@@ -52,7 +52,7 @@ const SedeHorario = () => {
       },
     },
     {
-      sede: 'CP Caminos del Inca',
+      sede: 'Cinux Chiclayo',
       horarios: {
         hoy: [
           {
@@ -69,7 +69,7 @@ const SedeHorario = () => {
       },
     },
     {
-      sede: 'CP El Polo',
+      sede: 'Cinux Piura Mall',
       horarios: {
         hoy: [
           {
@@ -86,7 +86,7 @@ const SedeHorario = () => {
       },
     },
     {
-      sede: 'CP La Molina',
+      sede: 'Cinux Trujillo',
       horarios: {
         hoy: [
           {

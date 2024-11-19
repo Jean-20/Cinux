@@ -1,6 +1,6 @@
 // Dulceria.jsx
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ingresoDatosCompra, actualizarCompra } from '../../Components/Redux/Compra/EntradaCompraSlice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -20,32 +20,48 @@ const Dulceria = () => {
   const combos = [
     {
       id: 'combo1',
-      nombre: 'Combo 2 Salado + 2 Kit Kat OL',
-      descripcion: '1 Canchita Gigante (Salado) + 2 Bebidas (2L)',
-      precio: 55.00,
-      imagen: '',
+      nombre: 'Canchita Gigante Mix',
+      descripcion: 'La mejor opción para compartir en pareja. ',
+      precio: 29.00,
+      imagen: 'https://tofuu.getjusto.com/orioneat-prod/SQcZmem7C6cyQs6Lj-cancha%20gigante2.png',
     },
     {
       id: 'combo2',
-      nombre: 'Combo 2 Kit',
-      descripcion: '1 Canchita Gigante (Dulce) + 2 Bebidas (2L)',
-      precio: 61.00,
-      imagen: '',
+      nombre: 'Canchita Gigante Dulce',
+      descripcion: 'Endulzate probando nuestra canchita dulce ¡Disfrútala!',
+      precio: 25.00,
+      imagen: 'https://tofuu.getjusto.com/orioneat-local/resized2/Sud67wdGj4WXgPMaL-800-x.webp',
     },
     {
       id: 'combo3',
-      nombre: 'Combo 2 Mix + 2 DUOMAX OL',
-      descripcion: '1 Canchita Gigante (Mix) + 2 Bebidas (2L)',
-      precio: 58.00,
-      imagen: '',
+      nombre: 'Canchita Gigante Salada',
+      descripcion: 'Para calmar tu antojo de Canchita Salada.',
+      precio: 25.00,
+      imagen: 'https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/falabellaPE/137232496_01/w=800,h=800,fit=pad',
     },
     {
       id: 'combo4',
-      nombre: 'Combo 2 Dulce + 2 DUOMAX OL',
-      descripcion: '1 Canchita Gigante (Dulce) + 2 Bebidas (2L)',
-      precio: 58.00,
-      imagen: '',
+      nombre: 'Coca Cola Personal',
+      descripcion: 'Disfruta de tu bebida favorita.',
+      precio: 5.00,
+      imagen: 'https://dojiw2m9tvv09.cloudfront.net/53648/product/M_sintitulo2556.png?73&time=1731343146',
     },
+    {
+      id: 'combo5',
+      nombre: 'Hot Dog Jumbo',
+      descripcion: 'Disfrútalo con papitas al hilo y las salsas que prefieras.',
+      precio: 13.50,
+      imagen: 'https://streetmeattoronto.com/wp-content/uploads/2020/03/quarter-pound-hotdog-scaled.jpg',
+    },
+    {
+      id: 'combo6',
+      nombre: 'Nachos con Queso Cheddar',
+      descripcion: 'Crujientes nachos con deliciosa salsa de queso caliente.',
+      precio: 13.50,
+      imagen: 'https://i.pinimg.com/originals/a3/7f/16/a37f16bdce345d133b00508ce36414fb.jpg',
+    },
+
+
   ];
 
   const handleIncrementar = (tipo) => {
@@ -59,7 +75,7 @@ const Dulceria = () => {
     }));
   };
 
-  
+
 
   const [recolecionDulces, setRecolecionDulces] = useState();
   const [recoleccionPrecio, setRecoleccionPrecio] = useState();
@@ -69,12 +85,12 @@ const Dulceria = () => {
   const handleCompra = () => {
     let dulcesCompradas = "";
     let precioTotal = 0;
-  
+
     combos.forEach((dulce) => {
       dulcesCompradas += `${dulce.nombre} `;
-        precioTotal += dulce.precio;
+      precioTotal += dulce.precio;
     });
-  
+
     setRecolecionDulces(dulcesCompradas.trim());
     setRecoleccionPrecio(precioTotal);
 
@@ -82,9 +98,9 @@ const Dulceria = () => {
       ...datos,
       dulceria: dulcesCompradas.trim(),
       precioTotal: resumenCompra.precioTotal + precioTotal,
-  }))
-    ;
-  
+    }))
+      ;
+
     navigate("/home/comprar/pago");
   };
 
@@ -125,7 +141,7 @@ const Dulceria = () => {
 
       <div className="mt-6 flex justify-center">
         <button
-          onClick={()=>handleCompra()}
+          onClick={() => handleCompra()}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar

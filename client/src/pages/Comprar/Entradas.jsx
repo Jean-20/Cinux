@@ -20,32 +20,32 @@ const Entradas = () => {
     ninos: "Niños",
     mayores: "Mayores",
   });
-  
+
   const precios = {
     general: 36.00,
     ninos: 34.00,
     mayores: 34.00,
   };
 
-  
+
   useEffect(() => {
     setCantidadMax(resumenCompra.cantidadAsientos);
     setCantidadReparto(resumenCompra.cantidadAsientos);
   }, [resumenCompra]);
-  
 
-  
-  
+
+
+
   const handleIncrementar = (tipo) => {
-    if(cantidadReparto > 0){
-      setCantidades((prev) => ({ 
-        ...prev, 
-        [tipo]: prev[tipo] + 1 > cantidadMax ? cantidadMax  : prev[tipo] + 1 ,
-    }));
-    setCantidadReparto((prev) => prev - 1);
+    if (cantidadReparto > 0) {
+      setCantidades((prev) => ({
+        ...prev,
+        [tipo]: prev[tipo] + 1 > cantidadMax ? cantidadMax : prev[tipo] + 1,
+      }));
+      setCantidadReparto((prev) => prev - 1);
 
     }
-    
+
   };
 
   const handleDecrementar = (tipo) => {
@@ -56,10 +56,10 @@ const Entradas = () => {
     setCantidadReparto((prev) => prev + 1);
   };
 
-  
+
   const datos = useSelector((state) => state.entradaCompra);
 
-  const entradas =[
+  const entradas = [
     {
       nombre: "general",
       tipoEntrada: "General 2D OL",
@@ -87,26 +87,26 @@ const Entradas = () => {
   const handleCompra = () => {
     let entradasCompradas = "";
     let precioTotal = 0;
-  
+
     entradas.forEach((entrada) => {
       if (entrada.cantidad > 0) {
         entradasCompradas += `${entrada.tipoEntrada} `;
         precioTotal += entrada.precio;
       }
     });
-  
+
     setRecolecionEntradas(entradasCompradas.trim());
     setRecoleccionPrecio(precioTotal);
-  
+
     dispatch(ingresoDatosCompra({
       ...datos,
       tipoEntrada: entradasCompradas.trim(),
       precioTotal: precioTotal,
     }));
-  
+
     navigate("/home/comprar/dulceria");
   };
-  
+
 
   return (
     <div className="p-8 bg-white rounded-lg shadow-lg w-full max-w-4xl mx-auto">
@@ -118,7 +118,7 @@ const Entradas = () => {
           <div>
             <p className="font-semibold">General 2D OL</p>
             <p>Incluye servicio online</p>
-            <p className="text-lg text-blue-600">${precios.general.toFixed(2)}</p>
+            <p className="text-lg text-blue-600">S/. {precios.general.toFixed(2)}</p>
           </div>
           <div className="flex items-center">
             <button
@@ -142,7 +142,7 @@ const Entradas = () => {
           <div>
             <p className="font-semibold">Niños 2D OL</p>
             <p>Para niños de 2 a 11 años. Incluye servicio online</p>
-            <p className="text-lg text-blue-600">${precios.ninos.toFixed(2)} <span className="text-sm text-gray-500">Precio más bajo</span></p>
+            <p className="text-lg text-blue-600">S/. {precios.ninos.toFixed(2)} <span className="text-sm text-gray-500">Precio más bajo</span></p>
           </div>
           <div className="flex items-center">
             <button
@@ -166,7 +166,7 @@ const Entradas = () => {
           <div>
             <p className="font-semibold">Mayores 60 años 2D OL</p>
             <p>Incluye servicio online</p>
-            <p className="text-lg text-blue-600">${precios.mayores.toFixed(2)} <span className="text-sm text-gray-500">Precio más bajo</span></p>
+            <p className="text-lg text-blue-600">S/. {precios.mayores.toFixed(2)} <span className="text-sm text-gray-500">Precio más bajo</span></p>
           </div>
           <div className="flex items-center">
             <button
@@ -189,7 +189,7 @@ const Entradas = () => {
       {/* Botón Continuar */}
       <div className="mt-6 flex justify-center">
         <button
-          onClick={()=> handleCompra()}
+          onClick={() => handleCompra()}
           className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors w-36"
         >
           Continuar

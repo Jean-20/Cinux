@@ -61,27 +61,19 @@ export const ComprarP = () => {
           className=""
         >
           <Step onClick={() => hadleClick(0)} className="cursor-pointer">
-            <HomeIcon className={`h-6 w-6 ${activeStep === 0 ? 'text-blue-500' : 'text-gray-400'}`} />
+            <HomeIcon className={`h-6 w-6 ${activeStep === 0 ? 'text-black' : 'text-black'}`} />
           </Step>
           <Step onClick={() => hadleClick(1)} className="cursor-pointer">
-            <UserIcon className={`h-6 w-6 ${activeStep === 1 ? 'text-blue-500' : 'text-gray-400'}`} />
+            <CogIcon className={`h-6 w-6 ${activeStep === 1 ? 'text-black' : 'text-black'}`} />
           </Step>
           <Step onClick={() => hadleClick(2)} className="cursor-pointer">
-            <CogIcon className={`h-6 w-6 ${activeStep === 2 ? 'text-blue-500' : 'text-gray-400'}`} />
+            <CogIcon className={`h-6 w-6 ${activeStep === 2 ? 'text-black' : 'text-black'}`} />
           </Step>
           <Step onClick={() => hadleClick(3)} className="cursor-pointer">
-            <CogIcon className={`h-6 w-6 ${activeStep === 3 ? 'text-blue-500' : 'text-gray-400'}`} />
+            <UserIcon className={`h-6 w-6 ${activeStep === 3 ? 'text-black' : 'text-black'}`} />
           </Step>
 
         </Stepper>
-        {/* <div className="flex justify-between">
-          <Button onClick={handlePrev} disabled={isFirstStep} className="bg-gray-300 text-gray-700 hover:bg-gray-400">
-            Anterior
-          </Button>
-          <Button onClick={handleNext} disabled={isLastStep} className="bg-blue-500 text-white hover:bg-blue-600">
-            Siguiente
-          </Button>
-        </div> */}
       </div>
     </>
 

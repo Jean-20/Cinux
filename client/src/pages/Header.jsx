@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   const usuario = useSelector((state) => state.usuario);
-  if(usuario === null) {
+  if (usuario === null) {
     setMenuOpen(true)
   }
 
@@ -59,12 +59,12 @@ const Header = () => {
       </nav>
 
       <div className="hidden md:flex items-center space-x-2">
-        <h2>Hola {usuario.nombre}!!</h2>
+        <h2 className="font-bold text-white">Hola {usuario.nombre}!!!</h2>
         <Link to="/login" className="text-white hover:bg-black focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-3 lg:px-4 py-2 lg:py-2.5 flex items-center">
           <FontAwesomeIcon icon={faUser} />
         </Link>
       </div>
-      
+
     </header>
   );
 };
