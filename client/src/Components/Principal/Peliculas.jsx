@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Spinner } from '@material-tailwind/react';
 import { getPeliculas } from '../../api/peliculas';
+import { useDispatch } from 'react-redux';
+import { ingresoDatosCompra } from '../Redux/Compra/EntradaCompraSlice';
+import { useSelector } from 'react-redux';
 
 const Recomendaciones = () => {
     const [peliculas, setPeliculas] = useState([]);
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const datos = useSelector((state) => state.entradaCompra);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,12 +28,36 @@ const Recomendaciones = () => {
         fetchData();
     }, []);
 
-    const btnAgregarRedux = (pelicula) => {
-        console.log(pelicula);
+    const hadleClick = (pelicula) => {
+
+        if(datos.email === " "){
+            navigate("/login");
+            return;
+        }
+        dispatch(ingresoDatosCompra({
+            ...datos,
+            nombrePelicula: pelicula,
+        }));
+        console.log(datos);
+
+        navigate("/home/comprar/sedes");
     }
 
-    const handleDetalles = (id) => {
-        navigate(`/home/pelicula/detalles/${id}`);
+    const hadleDetalles = (id, pelicula) => {
+        
+        dispatch(ingresoDatosCompra({
+            ...datos,
+            nombrePelicula: pelicula,
+        }));
+        console.log(datos);
+        
+        if(datos.email === " "){
+            navigate("/login");
+            return;
+        }else{
+            navigate("/home/pelicula/detalles/" + id);
+        }
+        
     }
 
     return (
@@ -60,14 +89,14 @@ const Recomendaciones = () => {
                                     <h3 className="font-semibold text-lg text-center">{pelicula.nombre}</h3>
                                 </div>
                                 <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <button className="flex space-x-4" onClick={() => btnAgregarRedux(pelicula.nombre)}>
+                                    <button className="flex space-x-4" onClick={() => hadleClick(pelicula.nombre)}>
                                         <Link
                                             to={`/home/comprar/sede`}
                                             className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-200"
                                         >
                                             Comprar
                                         </Link>
-                                        <button onClick={() => handleDetalles(pelicula._id)} className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
+                                        <button onClick={() => hadleDetalles(pelicula._id)} className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
                                             Más detalles
                                         </button>
                                     </button>

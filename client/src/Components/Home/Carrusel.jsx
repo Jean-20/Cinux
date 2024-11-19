@@ -40,11 +40,17 @@ const Carrusel = () => {
     const dispatch = useDispatch();
     const datos = useSelector((state) => state.entradaCompra);
     const handleClick = (pelicula) => {
+        if(datos.email === " "){
+            navigate("/login");
+            return;
+        }
+        
         dispatch(ingresoDatosCompra({
             ...datos,
             nombrePelicula: pelicula,
         }));
         console.log(datos);
+        
 
         navigate("/home/comprar/sedes");
     }

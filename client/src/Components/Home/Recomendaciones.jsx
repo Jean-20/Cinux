@@ -32,6 +32,11 @@ const Recomendaciones = () => {
     const datos = useSelector((state) => state.entradaCompra);
 
     const hadleClick = (pelicula) => {
+
+        if(datos.email === " "){
+            navigate("/login");
+            return;
+        }
         dispatch(ingresoDatosCompra({
             ...datos,
             nombrePelicula: pelicula,

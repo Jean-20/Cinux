@@ -123,7 +123,13 @@ const SedeHorario = () => {
     };
 
     dispatch(ingresoDatosCompra(nuevosDatos));
+    if(datos.email === " "){
+      navigate("/login");
+      return;
+  }else{
     navigate("/home/comprar/asiento");
+  }
+    
 
   }
 
