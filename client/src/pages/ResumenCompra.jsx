@@ -38,7 +38,7 @@ const ResumenCompra = () => {
         </div>
         <div className="flex justify-between gap-2 mb-1">
           <h1 className="font-bold text-black">Precio Total:</h1>
-          <h1 className="text-black">{resumenCompra.precioTotal}</h1>
+          <h1 className="text-black">S/. {resumenCompra.precioTotal}</h1>
         </div>
       </div>
     </>;
