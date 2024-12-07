@@ -2,50 +2,50 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../api/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import {getUser} from '../api/users';
+import { getUser } from '../api/users';
 import { ingresoDatosUsuario } from '../Components/Redux/Usuario/UsuarioSilce.jsx';
 import { ingresoDatosCompra } from '../Components/Redux/Compra/EntradaCompraSlice.jsx';
 
 
 const Login = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: {errors} } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const datoss = useSelector((state) => state.usuario);
     const data = useSelector((state) => state.entradaCompra);
 
     const handleLogin = async (data) => {
         try {
-          const res = await loginUser({
-            email: data.email,
-            password: data.password,
-          });
-    
-          if (res.status === 200) {
-            const datos = await getUser(data.email);
-            const nuevosDatos = {
-              ...datoss,
-              nombre: datos.nombre,
-              email: datos.email,
-              password: datos.password,
-            };
-            const nuevosDatosG = {
-                ...data,
-                nombre: datos.nombre,
-                email: datos.email,
-              };
-            dispatch(ingresoDatosCompra(nuevosDatosG));
-            dispatch(ingresoDatosUsuario(nuevosDatos));
-            console.log(datoss);
-            console.log(data);
+            const res = await loginUser({
+                email: data.email,
+                password: data.password,
+            });
 
-            navigate('/home');
-          }
+            if (res.status === 200) {
+                const datos = await getUser(data.email);
+                const nuevosDatos = {
+                    ...datoss,
+                    nombre: datos.nombre,
+                    email: datos.email,
+                    password: datos.password,
+                };
+                const nuevosDatosG = {
+                    ...data,
+                    nombre: datos.nombre,
+                    email: datos.email,
+                };
+                dispatch(ingresoDatosCompra(nuevosDatosG));
+                dispatch(ingresoDatosUsuario(nuevosDatos));
+                console.log(datoss);
+                console.log(data);
+
+                navigate('/home');
+            }
         } catch (error) {
-          console.error('Error registrando usuario:', error);
+            console.error('Error registrando usuario:', error);
         }
-      };
-    
+    };
+
     return (
         <section className="flex flex-col justify-center items-center min-h-screen bg-black text-white">
             <div className="m-5 p-5 bg-black text-white rounded-lg shadow-md max-w-md w-full">
@@ -55,7 +55,7 @@ const Login = () => {
                         <label htmlFor="email" className="block text-gray-300">Correo Electrónico</label>
                         <input
                             id="email"
-                            {...register ('email', {required: true})}
+                            {...register('email', { required: true })}
                             type="email"
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
@@ -66,7 +66,7 @@ const Login = () => {
                         <label htmlFor="password" className="block text-gray-300">Contraseña</label>
                         <input
                             id="password"
-                            {...register ('password', {required: true})}
+                            {...register('password', { required: true })}
                             type="password"
                             required
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"

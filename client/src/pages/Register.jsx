@@ -1,12 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
-import {registerUser} from '../api/users';
+import { registerUser } from '../api/users';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-
-
 const Register = () => {
-    const {register, handleSubmit, formState: {errors} } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [showModal, setShowModal] = useState(false);
 
     const navigate = useNavigate();
@@ -23,7 +21,7 @@ const Register = () => {
                 email: data.email,
                 password: data.password,
             });
-            
+
             setShowModal(true);
             setTimeout(() => {
                 setShowModal(false);
@@ -33,7 +31,6 @@ const Register = () => {
             console.error('Error registrando usuario:', error);
         }
     };
-
 
     return (
         <section className="flex flex-col justify-center items-center min-h-screen bg-black text-white">
@@ -45,8 +42,7 @@ const Register = () => {
                         <input
                             id="name"
                             type="text"
-                            {...register ('nombre', {required: true})}
-                            required
+                            {...register('nombre', { required: true })}
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
                         {errors.nombre && <span className="text-red-500">Este campo es requerido</span>}
@@ -56,8 +52,7 @@ const Register = () => {
                         <input
                             id="email"
                             type="email"
-                            {...register ('email', {required: true})}
-                            required
+                            {...register('email', { required: true })}
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
                         {errors.email && <span className="text-red-500">Este campo es requerido</span>}
@@ -67,19 +62,23 @@ const Register = () => {
                         <input
                             id="password"
                             type="password"
-                            {...register ('password', {required: true})}
-                            required
+                            {...register('password', {
+                                required: true,
+                                pattern: {
+                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                                    message: 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial',
+                                },
+                            })}
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
-                        {errors.password && <span className="text-red-500">Este campo es requerido</span>}
+                        {errors.password && <span className="text-red-500">{errors.password.message || 'Este campo es requerido'}</span>}
                     </div>
                     <div>
                         <label htmlFor="confirm-password" className="block text-gray-300">Confirmar Contraseña</label>
                         <input
                             id="confirm-password"
                             type="password"
-                            {...register ('confirmacionContraseña', {required: true})}
-                            required
+                            {...register('confirmacionContraseña', { required: true })}
                             className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 text-black"
                         />
                         {errors.confirmacionContraseña && <span className="text-red-500">Este campo es requerido</span>}
@@ -101,14 +100,14 @@ const Register = () => {
                 </div>
             </div>
             {showModal && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="bg-white p-5 rounded-lg shadow-lg text-center">
-                    <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <h2 className="text-xl font-bold">Registro exitoso</h2>
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-5 rounded-lg shadow-lg text-center">
+                        <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <h2 className="text-xl font-bold">Registro exitoso</h2>
+                    </div>
                 </div>
-            </div>
             )}
         </section>
     );
