@@ -1,1 +1,1 @@
-export const API= "https://cinuxadmin.onrender.com"
+export const API = "https://cinux.onrender.com"
