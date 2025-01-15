@@ -23,8 +23,20 @@ app.get('/', (req, res) => {
     res.send('Conectado');
 })
 
+// Configuración de CORS
+const allowedOrigins = [
+    'https://cinux.vercel.app',
+    'http://localhost:5173' // Opcional, para desarrollo local
+];
+
 app.use(cors({
-    origin: process.env.MAIN_PAGE.replace(/\/$/, '')  , //"http://localhost:5173"
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Permitir la solicitud
+        } else {
+            callback(new Error('Origen no permitido por CORS')); // Bloquear la solicitud
+        }
+    },
     credentials: true
 }));
 
